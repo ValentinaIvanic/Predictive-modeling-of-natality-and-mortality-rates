@@ -47,40 +47,40 @@ def data_to_int(data):
 
 
 def get_deaths():
-    data = get_dataFromEurostat("Data\Deaths (total) by month.xlsx", "Sheet 1")
+    data = get_dataFromEurostat("Data\Original\Deaths (total) by month.xlsx", "Sheet 1")
     data = data.drop(data.index[-1])
     data = data_to_int(data)
     data.rename(columns={'Population': 'Deaths'}, inplace=True)
     return data
 
 def get_births():
-    data = get_dataFromEurostat("Data\Live births (total) by month.xlsx", "Sheet 1")
+    data = get_dataFromEurostat("Data\Original\Live births (total) by month.xlsx", "Sheet 1")
     data = data.drop(data.index[-1])
     data = data_to_int(data)
     data.rename(columns={'Population': 'Births'}, inplace=True)
     return data
 
 def get_population():
-    data = get_dataFromEurostat("Data\Population on 1 January by age and sex.xlsx", "Sheet 1")
+    data = get_dataFromEurostat("Data\Original\Population on 1 January by age and sex.xlsx", "Sheet 1")
     data = data_to_int(data)
     return data
 
 #-------
 
 def get_womenAgeFirstBirth():
-    return get_dataFromEurostat("Data\Fertility indicators - mean women age at first child birth.xlsx", "Sheet 1")
+    return get_dataFromEurostat("Data\Original\Fertility indicators - mean women age at first child birth.xlsx", "Sheet 1")
 
 def get_womenCompletedAgeFirstMarriage():
-    return get_dataFromEurostat("Data\First marriage rates by age and sex - females.xlsx", "Sheet 1")
+    return get_dataFromEurostat("Data\Original\First marriage rates by age and sex - females.xlsx", "Sheet 1")
 
 def get_manCompletedAgeFirstMarriage():
-    return get_dataFromEurostat("Data\First marriage rates by age and sex - males.xlsx", "Sheet 1")
+    return get_dataFromEurostat("Data\Original\First marriage rates by age and sex - males.xlsx", "Sheet 1")
 
 def get_womenAgeFirstMarriage():
-    return get_dataFromEurostat("Data\First-time marrying persons by age and sex.xlsx", "Sheet 1")
+    return get_dataFromEurostat("Data\Original\First-time marrying persons by age and sex.xlsx", "Sheet 1")
 
 def get_HICPbyMonth():
-    return get_dataFromEurostat("Data\Harmonised index of consumer prices mjesečno.xlsx", "Sheet 1")
+    return get_dataFromEurostat("Data\Original\Harmonised index of consumer prices mjesečno.xlsx", "Sheet 1")
 
 # --------------------------------------------<</ Data from Eurostat >> ----------------------------------------------------
 
@@ -89,37 +89,37 @@ def get_HICPbyMonth():
 # --------------------------------------------<< Data from HNB >> ----------------------------------------------------
 
 def get_PriceIndexResidentalBuilding():
-    df = get_dataFromHNB("Data\Indeksi cijena stambenih objekata.xlsx", "HRV", 2)
+    df = get_dataFromHNB("Data\Original\Indeksi cijena stambenih objekata.xlsx", "HRV", 2)
     df = df.iloc[:-4]
     print(df)
     return df
 
 def get_ConsumerIndexes():
-    df = get_dataFromHNB("Data\Indeksi pouzdanja, očekivanja, raspoloženja potrošača.xlsx", "HRV", 3)
+    df = get_dataFromHNB("Data\Original\Indeksi pouzdanja, očekivanja, raspoloženja potrošača.xlsx", "HRV", 3)
     df = df.iloc[:-1]
     print(df)
     return df
 
 def get_ConsumerProducerPricesIndex():
-    df = get_dataFromHNB("Data\Indeksi potrošačkih cijena i prozivođačkih cijena industrije.xlsx", "HRV", 2)
+    df = get_dataFromHNB("Data\Original\Indeksi potrošačkih cijena i prozivođačkih cijena industrije.xlsx", "HRV", 2)
     df = df.iloc[:-3]
     print(df)
     return df
 
 def get_FundamentalConsumerPriceIndexes():
-    df = get_dataFromHNB("Data\Temeljni indeksi potrošačkih cijena.xlsx", "HRV", 4)
+    df = get_dataFromHNB("Data\Original\Temeljni indeksi potrošačkih cijena.xlsx", "HRV", 4)
     df = df.iloc[:-2]
     print(df)
     return df
 
 def get_HICP():
-    df = get_dataFromHNB("Data\Harmonizirani indeksi potrošačkih cijena.xlsx", "HRV", 2)
+    df = get_dataFromHNB("Data\Original\Harmonizirani indeksi potrošačkih cijena.xlsx", "HRV", 2)
     df = df.iloc[:-1]
     print(df)
     return df
 
 def get_AverageSalaryByMonth():
-    df = get_dataFromHNB("Data\Prosječna mjesečna neto plaća i indeksi.xlsx", "EUR", 3)
+    df = get_dataFromHNB("Data\Original\Prosječna mjesečna neto plaća i indeksi.xlsx", "EUR", 3)
     df = df.iloc[:-2]
     print(df)
     return df
@@ -145,3 +145,12 @@ def get_AverageSalaryByMonth():
 # get_FundamentalConsumerPriceIndexes()
 # get_HICP()
 # get_AverageSalaryByMonth()
+
+
+
+#------------------------------------------------- << New predicted data >> -------------------------------------------
+
+def get_predictedBirths():
+    data = pd.read_csv("Data/Predicted/births_predicted.csv")
+    return data
+

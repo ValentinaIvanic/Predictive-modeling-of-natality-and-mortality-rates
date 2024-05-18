@@ -6,10 +6,10 @@ sys.path.append(project_root)
 
 from Data_preprocessing import Data_extracting
 
-import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score, root_mean_squared_error
+
+#--------------------------------------------- << Data + Model >> ------------------------------------------------
 
 data_births = Data_extracting.get_births()
 
@@ -21,20 +21,40 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.75, rando
 model = LinearRegression()
 model.fit(x_train, y_train)
 
+#--------------------------------------------- <</ Data + Model >> ------------------------------------------------
+
+
+
+#--------------------------------------------- << Results >> ------------------------------------------------
+
+from check_score_metrics import *
 
 y_pred = model.predict(x_test)
+print_scores(y_test, y_pred)
 
-r2 = r2_score(y_test, y_pred)
-mae = mean_absolute_error(y_test, y_pred)
-mse = mean_squared_error(y_test, y_pred)
-rmse = root_mean_squared_error(y_test, y_pred)
-mape = np.mean(np.abs((y_test - y_pred) / y_test)) * 100
-
-print("R2 score:", r2)
-print("Mean Absolute Error (MAE):", mae)
-print("Mean Squared Error (MSE):", mse)
-print("Root Mean Squared Error (RMSE):", rmse)
-print("Mean Absolute Percentage Error (MAPE):", mape)
+#--------------------------------------------- <</ Results >> ------------------------------------------------
 
 
 
+#--------------------------------------------- << Predict new data >> ------------------------------------------------
+
+import pandas as pd
+
+current_year = data_births['Year'].max()
+years_to_predict = np.arange(current_year + 1, current_year + 51).reshape(-1, 1)
+
+births_predicted = model.predict(years_to_predict)
+
+#save predicted data
+
+data_predicted = pd.DataFrame({
+    'Year': years_to_predict.flatten(),
+    'Births': births_predicted.flatten()
+})
+
+data_predicted['Births'] = data_predicted['Births'].astype(int)
+
+
+data_predicted.to_csv('Data/Predicted/births_predicted.csv', index = False)
+
+#--------------------------------------------- <</ Predict new data >> ------------------------------------------------
