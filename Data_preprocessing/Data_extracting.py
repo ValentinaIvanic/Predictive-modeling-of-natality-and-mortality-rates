@@ -7,7 +7,6 @@ def get_dataFromEurostat(file_path, sheet_name):
 
     filtered_df = filtered_df[~filtered_df[0].isna()]
     filtered_df = filtered_df.dropna(axis=1, how='all')
-
     return filtered_df
 
 def get_dataFromHNB(file_path, sheet_name, header):
@@ -26,6 +25,7 @@ def get_dataFromHNB(file_path, sheet_name, header):
 
 # --------------------------------------------<< Data from Eurostat >> ----------------------------------------------------
 
+
 def get_deaths():
     return get_dataFromEurostat("Data\Deaths (total) by month.xlsx", "Sheet 1")
 
@@ -33,8 +33,19 @@ def get_births():
     return get_dataFromEurostat("Data\Live births (total) by month.xlsx", "Sheet 1")
 
 def get_population():
-    return get_dataFromEurostat("Data\Population on 1 January by age and sex.xlsx", "Sheet 1")
+    df = get_dataFromEurostat("Data\Population on 1 January by age and sex.xlsx", "Sheet 1")
+    data_transposed = df.T
+    data_transposed.columns = data_transposed.iloc[0]
+    data_transposed = data_transposed[1:].reset_index(drop=True)
+    data_transposed = data_transposed.dropna(subset=['TIME'], axis=0)
 
+    data_transposed['TIME'] = data_transposed['TIME'].astype(int)
+    data_transposed['Croatia'] = data_transposed['Croatia'].astype(int)
+
+    data_transposed.rename(columns={'TIME': 'Year', 'Croatia': 'Population'}, inplace=True)
+
+
+    return data_transposed
 #-------
 
 def get_womenAgeFirstBirth():
@@ -103,11 +114,11 @@ def get_AverageSalaryByMonth():
 # get_manCompletedAgeFirstMarriage()
 # get_HICPbyMonth()
 # get_births()
-# get_population()
+get_population()
 
-get_PriceIndexResidentalBuilding()
-get_ConsumerIndexes()
-get_ConsumerProducerPricesIndex()
-get_FundamentalConsumerPriceIndexes()
-get_HICP()
-get_AverageSalaryByMonth()
+# get_PriceIndexResidentalBuilding()
+# get_ConsumerIndexes()
+# get_ConsumerProducerPricesIndex()
+# get_FundamentalConsumerPriceIndexes()
+# get_HICP()
+# get_AverageSalaryByMonth()
