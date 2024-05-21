@@ -154,3 +154,7 @@ def get_predictedBirths():
     data = pd.read_csv("Data/Predicted/births_predicted.csv")
     return data
 
+def get_predictedDeaths():
+    data = pd.read_csv("Data/Predicted/deaths_predicted.csv")
+    return data
+

@@ -21,19 +21,12 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.75, rando
 model = LinearRegression()
 model.fit(x_train, y_train)
 
-#--------------------------------------------- <</ Data + Model >> ------------------------------------------------
-
-
-
 #--------------------------------------------- << Results >> ------------------------------------------------
 
 from check_score_metrics import *
 
 y_pred = model.predict(x_test)
 print_scores(y_test, y_pred)
-
-#--------------------------------------------- <</ Results >> ------------------------------------------------
-
 
 
 #--------------------------------------------- << Predict new data >> ------------------------------------------------
@@ -57,4 +50,3 @@ data_predicted['Births'] = data_predicted['Births'].astype(int)
 
 data_predicted.to_csv('Data/Predicted/births_predicted.csv', index = False)
 
-#--------------------------------------------- <</ Predict new data >> ------------------------------------------------
