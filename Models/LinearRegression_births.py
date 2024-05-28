@@ -50,3 +50,17 @@ data_predicted['Births'] = data_predicted['Births'].astype(int)
 
 data_predicted.to_csv('Data/Predicted/births_predicted.csv', index = False)
 
+
+
+#--------------------------------------------- << TimeSeriesSplit >> ------------------------------------------------
+print("Time series split")
+from sklearn.model_selection import TimeSeriesSplit, cross_val_score
+
+model_TSS = LinearRegression()
+
+TSS = TimeSeriesSplit(n_splits=3)
+
+scores = cross_val_score(model_TSS, x, y, cv=TSS, scoring='r2')
+
+print(scores)
+

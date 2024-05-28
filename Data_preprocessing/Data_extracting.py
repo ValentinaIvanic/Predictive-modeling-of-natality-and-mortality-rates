@@ -158,3 +158,47 @@ def get_predictedDeaths():
     data = pd.read_csv("Data/Predicted/deaths_predicted.csv")
     return data
 
+
+
+#------------------------------------------------- << Data from WorldBank >> -------------------------------------------
+
+def worldbankData_transform():
+
+    data = pd.read_excel("Data/Original/P_Data_Extract_From_World_Development_Indicators.xlsx", sheet_name="Data")
+
+    data = data.drop(data.columns[[1, 2, 3]], axis=1)
+    data = data.T
+
+
+
+
+    data.rename(columns={'Series Name': 'Year'}, inplace=True)
+    print("------------------------")
+
+    data.reset_index(inplace=True)
+    data.insert(0, 'Series Name', data.pop('index'))
+    data.reset_index(drop=True, inplace=True)
+
+
+    new_column_names = data.iloc[0]
+
+    data.columns = new_column_names
+    data = data.drop(0)
+    data.reset_index(drop=True, inplace=True)
+    data.rename(columns={'Series Name': 'Year'}, inplace=True)
+    data['Year'] = data['Year'].str.extract('(\d{4})')
+
+    data.to_excel('Data/Original/WorldBank_transformed.xlsx', index = False)
+
+
+def get_worldbankForBirths():
+    columns_births = ['Year', 'Net migration', 'Population in largest city', 'Population growth (annual %)', 'Population, total', 
+                      'Rural population', 'Rural population (% of total population)', 'Rural population growth (annual %)', 
+                      'Urban population (% of total population)', 'Urban population']
+    data = pd.read_excel("Data/Original/WorldBank_transformed.xlsx", sheet_name="Sheet1", usecols=columns_births)
+
+    data = data.apply(pd.to_numeric, errors='coerce')
+    return data
+
+
+
