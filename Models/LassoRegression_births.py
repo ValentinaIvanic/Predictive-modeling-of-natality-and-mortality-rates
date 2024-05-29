@@ -50,22 +50,36 @@ merged_data = pd.merge(data, data_features, on='Year')
 
 merged_data = merged_data.dropna(axis=0, how='any')
 
-merged_data[['Year', 'Urban population (% of total population)',
-       'Urban population', 'Rural population',
-       'Rural population (% of total population)',
-       'Rural population growth (annual %)', 'Population, total',   
-       'Population growth (annual %)', 'Population in largest city',
-       'Net migration']] = merged_data[['Year', 'Urban population (% of total population)',
-                                        'Urban population', 'Rural population',
-                                        'Rural population (% of total population)',
-                                        'Rural population growth (annual %)', 'Population, total',   
-                                        'Population growth (annual %)', 'Population in largest city',
-                                        'Net migration']].astype(float)
 
-x = merged_data[['Year',
-       'Urban population', 'Rural population',
-       'Population, total',
-       'Net migration']].values
+#---------------------------------------------------<< Provjera kolinearnosti >>-----------------------------------------------
+
+import statsmodels.api as sm
+
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+
+x_provjera = merged_data[['Year', 'Net migration',  
+                        'Rural population growth (annual %)', 'Population in the largest city (% of urban population)']]
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+x_provjera_scaled = scaler.fit_transform(x_provjera)
+
+x_provjera_scaled = sm.add_constant(x_provjera_scaled)
+x_provjera_scaled = pd.DataFrame(x_provjera_scaled, columns=['const'] + x_provjera.columns.tolist())
+
+vif = pd.DataFrame()
+vif["Stupci"] = x_provjera_scaled.columns
+vif["VIF"] = [variance_inflation_factor(x_provjera_scaled, i) for i in range(x_provjera_scaled.shape[1])]
+
+
+print("\n------------------------------")
+print(vif)
+print("------------------------------\n")
+
+#----------------------------------------------------<< Model >>-------------------------------------------------------
+
+
+x = merged_data[['Year', 'Net migration', 'Population in the largest city (% of urban population)',  
+                        'Rural population growth (annual %)']].values
 y = merged_data[['Births']].values.reshape(-1, 1)
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.75, random_state=50)

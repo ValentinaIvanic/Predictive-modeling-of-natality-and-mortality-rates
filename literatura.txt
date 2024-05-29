@@ -2,7 +2,7 @@
 
 https://link.springer.com/article/10.1007/s13385-022-00307-3
 https://github.com/aisha-rm/Data-Sci-Projects/blob/main/CAPSTONE_PROJECT%20final%20(2).ipynb
-
+https://statisticsbyjim.com/regression/multicollinearity-in-regression-analysis/
 
 
 

@@ -194,8 +194,20 @@ def worldbankData_transform():
 def get_worldbankForBirths():
     columns_births = ['Year', 'Net migration', 'Population in largest city', 'Population growth (annual %)', 'Population, total', 
                       'Rural population', 'Rural population (% of total population)', 'Rural population growth (annual %)', 
-                      'Urban population (% of total population)', 'Urban population']
+                      'Urban population (% of total population)', 'Urban population', 'Population in the largest city (% of urban population)']
     data = pd.read_excel("Data/Original/WorldBank_transformed.xlsx", sheet_name="Sheet1", usecols=columns_births)
+
+    data = data.apply(pd.to_numeric, errors='coerce')
+    return data
+
+
+def get_worldbankForDeaths():
+    columns_deaths = ['Year', 'Life expectancy at birth, total (years)', 'Urban population (% of total population)', 
+                      'Urban population', 'Survival to age 65, female (% of cohort)', 'Survival to age 65, male (% of cohort)', 
+                      'Rural population', 'Rural population (% of total population)', 'Rural population growth (annual %)', 
+                      'Population, total', 'Net migration', 'Population in largest city', 'Population growth (annual %)', 
+                      'Population ages 80 and above, male (% of male population)', 'Population in the largest city (% of urban population)']
+    data = pd.read_excel("Data/Original/WorldBank_transformed.xlsx", sheet_name="Sheet1", usecols=columns_deaths)
 
     data = data.apply(pd.to_numeric, errors='coerce')
     return data
