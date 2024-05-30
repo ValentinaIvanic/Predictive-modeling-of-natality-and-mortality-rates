@@ -1,12 +1,4 @@
-import sys
-import os
-
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.append(project_root)
-
-from Data_preprocessing import Data_extracting
-
-from sklearn.model_selection import train_test_split
+from model_imports import *
 from sklearn.linear_model import LinearRegression
 
 #--------------------------------------------- << Data + Model >> ------------------------------------------------
@@ -33,8 +25,6 @@ print_scores(y_test, y_pred)
 
 
 #--------------------------------------------- << Predict new data >> ------------------------------------------------
-
-import pandas as pd
 
 current_year = data_deaths['Year'].max()
 years_to_predict = np.arange(current_year + 1, current_year + 51).reshape(-1, 1)

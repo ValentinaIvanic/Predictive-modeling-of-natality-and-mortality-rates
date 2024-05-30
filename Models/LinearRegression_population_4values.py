@@ -1,16 +1,6 @@
-import sys
-import os
-
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.append(project_root)
-
-from Data_preprocessing import Data_extracting
-
-from sklearn.model_selection import train_test_split
+from model_imports import *
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import Ridge
-from sklearn.preprocessing import MinMaxScaler
-import pandas as pd
 
 #--------------------------------------------- << Data + Model >> ------------------------------------------------
 
@@ -47,9 +37,6 @@ print("--------------------------------")
 
 
 #--------------------------------------------- << Predict new data >> ------------------------------------------------
-
-
-import pandas as pd
 
 data_predictedBirths = Data_extracting.get_predictedBirths()
 data_predictedDeaths = Data_extracting.get_predictedDeaths()

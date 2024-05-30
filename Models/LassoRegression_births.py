@@ -1,18 +1,6 @@
-import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split
+from model_imports import *
 from sklearn.linear_model import Lasso
 
-import sys
-import os
-
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.append(project_root)
-
-from Data_preprocessing import Data_extracting
-
-import warnings
-warnings.filterwarnings('ignore')
 
 #------------------------------------<< Features: year only >>-----------------------------------------
 print()

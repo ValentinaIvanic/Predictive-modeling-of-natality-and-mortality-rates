@@ -1,18 +1,6 @@
-import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split
+from model_imports import *
 from sklearn.linear_model import Lasso
 
-import sys
-import os
-
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-sys.path.append(project_root)
-
-from Data_preprocessing import Data_extracting
-
-import warnings
-warnings.filterwarnings('ignore')
 
 #------------------------------------<< Features: year only >>-----------------------------------------
 print()
@@ -56,11 +44,13 @@ merged_data = merged_data.dropna(axis=0, how='any')
 
 import statsmodels.api as sm
 from statsmodels.stats.outliers_influence import variance_inflation_factor
+from sklearn.preprocessing import StandardScaler
 
 x_provjera = merged_data[['Year', 'Survival to age 65, male (% of cohort)',
                          'Rural population (% of total population)',
                          'Net migration', 'Population growth (annual %)' ]]
-from sklearn.preprocessing import StandardScaler
+
+
 scaler = StandardScaler()
 x_provjera_scaled = scaler.fit_transform(x_provjera)
 
