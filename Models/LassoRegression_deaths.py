@@ -12,7 +12,7 @@ data = Data_extracting.get_deaths()
 x = data['Year'].values.reshape(-1, 1) #pretvorba iz DataFrame-a u 2d nizove
 y = data['Deaths'].values.reshape(-1, 1)
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.6, random_state=100)
+x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.8, random_state=100)
 
 model = Lasso(alpha=0.25)
 model.fit(x_train, y_train)

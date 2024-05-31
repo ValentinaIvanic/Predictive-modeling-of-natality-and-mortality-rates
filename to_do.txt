@@ -1,0 +1,6 @@
+figures:
+- XGBRegression models predikcije i to
+- -||- za (ne)overfitting
+- XGB bez year?
+
+- koliko koja značajka utjece i kako
