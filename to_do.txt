@@ -4,3 +4,9 @@ figures:
 - XGB bez year?
 
 - koliko koja značajka utjece i kako
+- također opcenito kolko koje utjece na natalitet / mortalitet
+- GRAFICI ZA OVERFITTING ZA SVE KAJ NEMAJU KAJ SU SKORO SVI :DDDDD
+
+ExtremeGradientBoosting_births_needCheckForCollinearity --- i onda na one s smallData
+
+POPULATION ESTIMATE SA NAJBOLJIM MODELOM????????

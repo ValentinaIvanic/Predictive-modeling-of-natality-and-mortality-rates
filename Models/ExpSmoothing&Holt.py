@@ -55,26 +55,26 @@ def model_Holt(train, test, stupac, damped_mod):
 #--------------------------------------------------------<< Deaths >>----------------------------------------------------------------------
 
 
-data = Data_extracting.get_worldbankForDeaths()
+data = Data_extracting.smoothingHolt_deaths()
 
 train_deaths = data.iloc[:int(0.6 * len(data))]
 test_deaths = data.iloc[int(0.6 * len(data)):]
 
 
-forecast_expSmoothing_Deaths = exp_Smoothing(train_deaths, test_deaths, 'Death rate, crude (per 1,000 people)', 'mul', False)
+forecast_expSmoothing_Deaths = exp_Smoothing(train_deaths, test_deaths, 'Death rate, crude (per 1,000 people)', 'add', False)
 forecast_Holt_deaths = model_Holt(train_deaths, test_deaths, 'Death rate, crude (per 1,000 people)', False)
 
 plot_func_HOLT(train_deaths, test_deaths, forecast_expSmoothing_Deaths, forecast_Holt_deaths, "Modeli s izglađivanjem", "Death rate, crude (per 1,000 people)", "Broj umrlih na 1000 ljudi")
 
 #--------------------------------------------------------<< Births >>----------------------------------------------------------------------
 
-data = Data_extracting.get_worldbankForBirths()
+data = Data_extracting.smoothingHolt_births()
 
 train = data.iloc[:int(0.5 * len(data))]
 test = data.iloc[int(0.5 * len(data)):]
 
 
-forecast_expSmoothing = exp_Smoothing(train, test, 'Birth rate, crude (per 1,000 people)', 'mul', True)
+forecast_expSmoothing = exp_Smoothing(train, test, 'Birth rate, crude (per 1,000 people)', 'add', True)
 forecast_Holt = model_Holt(train, test, 'Birth rate, crude (per 1,000 people)', True)
 
 plot_func_HOLT(train, test, forecast_expSmoothing, forecast_Holt, "Modeli s izglađivanjem", "Birth rate, crude (per 1,000 people)", "Broj rođenih na 1000 ljudi")
@@ -85,7 +85,6 @@ from check_score_metrics import *
 
 
 print("Births expSmoothing")
-print(forecast_expSmoothing.iloc[:-2], test['Birth rate, crude (per 1,000 people)'].iloc[:-2])
 print_scores(test['Birth rate, crude (per 1,000 people)'].iloc[:-2], forecast_expSmoothing.iloc[:-2])
 print("-------------------------------------------")
 

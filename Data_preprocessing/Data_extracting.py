@@ -193,6 +193,11 @@ def worldBank_populationsEstimates():
     data4 = pd.read_excel("Data/Original/P_Data_Extract_From_Population_estimates_and_projections.xlsx", sheet_name="Data", skiprows=range(1, 114),  nrows=1)
     data5 = pd.read_excel("Data/Original/P_Data_Extract_From_Population_estimates_and_projections.xlsx", sheet_name="Data", skiprows=range(1, 2),  nrows=2)
 
+    # Age dependency ratio, old
+    # Age dependency ratio, young
+    # Population ages 15-64 (% of total population)
+    # Population ages 20-24, female (% of female population)
+    # Population ages 65 and above (% of total population)
 
     data2 = data2.drop(data2.columns[[0, 1, 3]], axis=1)
     data3 = data3.drop(data3.columns[[0, 1, 3]], axis=1)
@@ -236,6 +241,30 @@ def worldBank_populationsEstimates():
 
     return merged_data
 
+def smoothingHolt_births():
+    columns_births = ['Year', 'Net migration', 'Population in largest city', 'Population growth (annual %)', 'Population, total', 
+                      'Rural population', 'Rural population (% of total population)', 'Rural population growth (annual %)', 
+                      'Urban population (% of total population)', 'Urban population', 'Population in the largest city (% of urban population)',
+                      'Birth rate, crude (per 1,000 people)']
+    data = pd.read_excel("Data/Original/WorldBank_transformed.xlsx", sheet_name="Sheet1", usecols=columns_births)
+    data = data.apply(pd.to_numeric, errors='coerce')
+
+    return data
+
+
+def smoothingHolt_deaths():
+    columns_deaths = ['Year', 'Life expectancy at birth, total (years)', 'Urban population (% of total population)', 
+                      'Urban population', 'Survival to age 65, female (% of cohort)', 'Survival to age 65, male (% of cohort)', 
+                      'Rural population', 'Rural population (% of total population)', 'Rural population growth (annual %)', 
+                      'Population, total', 'Net migration', 'Population in largest city', 'Population growth (annual %)', 
+                      'Population ages 80 and above, male (% of male population)', 'Population in the largest city (% of urban population)',
+                      'Death rate, crude (per 1,000 people)']
+    data = pd.read_excel("Data/Original/WorldBank_transformed.xlsx", sheet_name="Sheet1", usecols=columns_deaths)
+    data = data.apply(pd.to_numeric, errors='coerce')
+
+    return data
+
+
 
 def get_worldbankForBirths():
     columns_births = ['Year', 'Net migration', 'Population in largest city', 'Population growth (annual %)', 'Population, total', 
@@ -243,13 +272,13 @@ def get_worldbankForBirths():
                       'Urban population (% of total population)', 'Urban population', 'Population in the largest city (% of urban population)',
                       'Birth rate, crude (per 1,000 people)']
     data = pd.read_excel("Data/Original/WorldBank_transformed.xlsx", sheet_name="Sheet1", usecols=columns_births)
-
+    data = data.apply(pd.to_numeric, errors='coerce')
     data2 = worldBank_populationsEstimates()
     data2['Year'] = data2['Year'].astype(int)
 
     merged_data = pd.merge(data2, data, on='Year')
     merged_data = merged_data.apply(pd.to_numeric, errors='coerce')
-    return data
+    return merged_data
 
 
 def get_worldbankForDeaths():
@@ -281,6 +310,8 @@ def get_worldbankEconomics():
 
     data_filtered = data[data['Year'].str.contains(r'^\d{4}\s\[\d{4}\]$', regex=True)]
     data_filtered['Year'] = data_filtered['Year'].str.extract('(\d{4})')
+
+    data_filtered = data_filtered.apply(pd.to_numeric, errors='coerce')
 
     return data_filtered
 
