@@ -169,9 +169,6 @@ def worldbankData_transform():
     data = data.drop(data.columns[[1, 2, 3]], axis=1)
     data = data.T
 
-
-
-
     data.rename(columns={'Series Name': 'Year'}, inplace=True)
     print("------------------------")
 
@@ -190,6 +187,55 @@ def worldbankData_transform():
 
     data.to_excel('Data/Original/WorldBank_transformed.xlsx', index = False)
 
+def worldBank_populationsEstimates():
+    data2 = pd.read_excel("Data/Original/P_Data_Extract_From_Population_estimates_and_projections.xlsx", sheet_name="Data", skiprows=range(1, 107),  nrows=1)
+    data3 = pd.read_excel("Data/Original/P_Data_Extract_From_Population_estimates_and_projections.xlsx", sheet_name="Data", skiprows=range(1, 149),  nrows=1)
+    data4 = pd.read_excel("Data/Original/P_Data_Extract_From_Population_estimates_and_projections.xlsx", sheet_name="Data", skiprows=range(1, 114),  nrows=1)
+    data5 = pd.read_excel("Data/Original/P_Data_Extract_From_Population_estimates_and_projections.xlsx", sheet_name="Data", skiprows=range(1, 2),  nrows=2)
+
+
+    data2 = data2.drop(data2.columns[[0, 1, 3]], axis=1)
+    data3 = data3.drop(data3.columns[[0, 1, 3]], axis=1)
+    data4 = data4.drop(data4.columns[[0, 1, 3]], axis=1)
+    data5 = data5.drop(data5.columns[[0, 1, 3]], axis=1)
+
+
+    data2 = data2.transpose().reset_index()
+    data3 = data3.transpose().reset_index()
+    data4 = data4.transpose().reset_index()
+    data5 = data5.transpose().reset_index()
+
+    new_column_names = data2.iloc[0]
+    data2.columns = new_column_names
+    data2 = data2.drop(0)
+
+    new_column_names = data3.iloc[0]
+    data3.columns = new_column_names
+    data3 = data3.drop(0)
+
+    new_column_names = data4.iloc[0]
+    data4.columns = new_column_names
+    data4 = data4.drop(0)
+
+    new_column_names = data5.iloc[0]
+    data5.columns = new_column_names
+    data5 = data5.drop(0)
+
+    data2.rename(columns={'Series Name': 'Year'}, inplace=True)
+    data3.rename(columns={'Series Name': 'Year'}, inplace=True)
+    data4.rename(columns={'Series Name': 'Year'}, inplace=True)
+    data5.rename(columns={'Series Name': 'Year'}, inplace=True)
+
+    merged_data = pd.merge(data2, data3, on='Year')
+    merged_data = pd.merge(merged_data, data4, on='Year')
+    merged_data = pd.merge(merged_data, data5, on='Year')
+
+    merged_data['Year'] = merged_data['Year'].str.extract('(\d{4})')
+
+    merged_data = merged_data[merged_data['Year'].astype(int) < 2022]
+
+    return merged_data
+
 
 def get_worldbankForBirths():
     columns_births = ['Year', 'Net migration', 'Population in largest city', 'Population growth (annual %)', 'Population, total', 
@@ -198,7 +244,11 @@ def get_worldbankForBirths():
                       'Birth rate, crude (per 1,000 people)']
     data = pd.read_excel("Data/Original/WorldBank_transformed.xlsx", sheet_name="Sheet1", usecols=columns_births)
 
-    data = data.apply(pd.to_numeric, errors='coerce')
+    data2 = worldBank_populationsEstimates()
+    data2['Year'] = data2['Year'].astype(int)
+
+    merged_data = pd.merge(data2, data, on='Year')
+    merged_data = merged_data.apply(pd.to_numeric, errors='coerce')
     return data
 
 
@@ -211,8 +261,28 @@ def get_worldbankForDeaths():
                       'Death rate, crude (per 1,000 people)']
     data = pd.read_excel("Data/Original/WorldBank_transformed.xlsx", sheet_name="Sheet1", usecols=columns_deaths)
 
-    data = data.apply(pd.to_numeric, errors='coerce')
-    return data
+    data2 = worldBank_populationsEstimates()
+    data2['Year'] = data2['Year'].astype(int)
 
+    merged_data = pd.merge(data2, data, on='Year')
+    merged_data = merged_data.apply(pd.to_numeric, errors='coerce')
+    return merged_data
 
+def get_worldbankEconomics():
+    data = pd.read_excel("Data/Original/P_Data_Extract_From_Global_Economic_Monitor_(GEM).xlsx", sheet_name="Data", skiprows=range(1, 5),  nrows=3)
+
+    data = data.drop(data.columns[[0, 1, 3]], axis=1)
+    data = data.transpose().reset_index()
+
+    new_column_names = data.iloc[0]
+    data.columns = new_column_names
+    data = data.drop(0)
+    data.rename(columns={'Series': 'Year'}, inplace=True)
+
+    data_filtered = data[data['Year'].str.contains(r'^\d{4}\s\[\d{4}\]$', regex=True)]
+    data_filtered['Year'] = data_filtered['Year'].str.extract('(\d{4})')
+
+    return data_filtered
+
+get_worldbankEconomics()
 
