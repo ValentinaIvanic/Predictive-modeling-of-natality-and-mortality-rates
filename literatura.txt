@@ -20,3 +20,6 @@ https://www.mecs-press.org/ijeme/ijeme-v13-n2/IJEME-V13-N2-1.pdf
 https://link.springer.com/article/10.1007/s13385-022-00307-3
 https://www.soa.org/493665/globalassets/assets/files/static-pages/research/arch/2023/arch-2023-1-mortality-rates-forecasting.pdf
 https://www.kaggle.com/code/karlentsatinyan/lstm-for-us-birth-rate-prediction#Model-(LSTM)
+
+
+https://www.youtube.com/watch?v=c0k-YLQGKjY&ab_channel=GregHogg
