@@ -70,12 +70,12 @@ print("------------------------------\n")
 #----------------------------------------------------<< Model >>-------------------------------------------------------
 
 
-x = merged_data[['Year', 'Survival to age 65, male (% of cohort)',
+x = merged_data[['Year',
                          'Life expectancy at birth, total (years)', 
                          'Rural population (% of total population)']].values
 y = merged_data[['Deaths']].values.reshape(-1, 1)
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.6, random_state=50)
+x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.8, random_state=100)
 
 from sklearn.preprocessing import StandardScaler
 scaler = StandardScaler()

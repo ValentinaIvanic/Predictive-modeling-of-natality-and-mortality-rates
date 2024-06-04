@@ -84,8 +84,6 @@ def get_HICPbyMonth():
 
 # --------------------------------------------<</ Data from Eurostat >> ----------------------------------------------------
 
-
-
 # --------------------------------------------<< Data from HNB >> ----------------------------------------------------
 
 def get_PriceIndexResidentalBuilding():
@@ -125,6 +123,15 @@ def get_AverageSalaryByMonth():
     return df
 
 # --------------------------------------------<</ Data from HNB >> ----------------------------------------------------
+
+print(get_womenAgeFirstBirth())
+print(get_womenCompletedAgeFirstMarriage())
+print(get_manCompletedAgeFirstMarriage())
+print(get_womenAgeFirstMarriage())
+# print(get_HICPbyMonth())
+# print(get_PriceIndexResidentalBuilding())
+# print(get_ConsumerIndexes())
+# print(get_AverageSalaryByMonth())
 
 
 # print(get_births())
