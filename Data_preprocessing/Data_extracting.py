@@ -123,10 +123,6 @@ def get_AverageSalaryByMonth():
     return df
 
 # --------------------------------------------<</ Data from HNB >> ----------------------------------------------------
-
-
-
-
 #------------------------------------------------- << New predicted data >> -------------------------------------------
 
 def get_predictedBirths():
@@ -136,8 +132,6 @@ def get_predictedBirths():
 def get_predictedDeaths():
     data = pd.read_csv("Data/Predicted/deaths_predicted.csv")
     return data
-
-
 
 #------------------------------------------------- << Data from WorldBank >> -------------------------------------------
 
@@ -230,7 +224,6 @@ def smoothingHolt_births():
 
     return data
 
-
 def smoothingHolt_deaths():
     columns_deaths = ['Year', 'Life expectancy at birth, total (years)', 'Urban population (% of total population)', 
                       'Urban population', 'Survival to age 65, female (% of cohort)', 'Survival to age 65, male (% of cohort)', 
@@ -242,8 +235,6 @@ def smoothingHolt_deaths():
     data = data.apply(pd.to_numeric, errors='coerce')
 
     return data
-
-
 
 def get_worldbankForBirths():
     columns_births = ['Year', 'Net migration', 'Population in largest city', 'Population growth (annual %)', 'Population, total', 
@@ -258,7 +249,6 @@ def get_worldbankForBirths():
     merged_data = pd.merge(data2, data, on='Year')
     merged_data = merged_data.apply(pd.to_numeric, errors='coerce')
     return merged_data
-
 
 def get_worldbankForDeaths():
     columns_deaths = ['Year', 'Life expectancy at birth, total (years)', 'Urban population (% of total population)', 
