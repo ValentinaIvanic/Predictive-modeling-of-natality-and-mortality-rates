@@ -23,3 +23,15 @@ Harmonised index of consumer prices mjesečno [1998. - 2024.] : https://ec.europ
 
 
 World Development Indicators | DataBank (worldbank.org)
+
+https://www.macrotrends.net/global-metrics/countries/HRV/croatia/unemployment-rate
+https://www.macrotrends.net/global-metrics/countries/HRV/croatia/manufacturing-output
+https://www.macrotrends.net/global-metrics/countries/HRV/croatia/net-migration
+https://www.macrotrends.net/global-metrics/countries/HRV/croatia/youth-unemployment-rate
+https://www.macrotrends.net/global-metrics/countries/HRV/croatia/inflation-rate-cpi
+
+https://www.rug.nl/ggdc/historicaldevelopment/maddison/releases/maddison-project-database-2023 _ LICENCA NEKE??????????????????
+-- > https://dataverse.nl/dataset.xhtml?persistentId=doi:10.34894/INZBF2
+
+https://databank.worldbank.org/reports.aspx?source=1250&series=GFDD.DM.01# - stock market capitalization to GDP
+

@@ -5,13 +5,27 @@ from xgboost import XGBRegressor, plot_importance
 data = Data_extracting.get_worldbankForBirths()
 data_births = Data_extracting.get_births()
 data_economics = Data_extracting.get_worldbankEconomics()
+data_manufacturing = Data_extracting.get_manufacturingOutput()
+data_inflation = Data_extracting.get_inflation()
+data_employment = Data_extracting.get_unemployment()
+data_trade = Data_extracting.get_Imports_Exports()
+
 
 merged_data = pd.merge(data, data_births, on='Year')
 merged_data = pd.merge(merged_data, data_economics, on='Year')
-merged_data = merged_data[merged_data['Year'].astype(int) > 1986]
+merged_data = pd.merge(merged_data, data_manufacturing, on='Year')
+merged_data = pd.merge(merged_data, data_inflation, on='Year')
+merged_data = pd.merge(merged_data, data_employment, on='Year')
+merged_data = pd.merge(merged_data, data_trade, on='Year')
+
+
+merged_data = merged_data[merged_data['Year'].astype(int) > 1995]
 merged_data = merged_data.dropna(axis=0, how='any')
 
-#ak smanjim broj godina (gore 1986 na npr. 1995) onda se pogorsa ak ima stupac Year
+print(merged_data.columns)
+# provjeri sa i bez Year, provjerit sve kombinacije moguce ale ale ala, kaj je najmanje moguce a da dela dosta dobro?
+# jos neke moguce opcije(nisu pomogle sa svim ovim ali sa manjim skupom mozda bi):
+#  % of GDP-Imports | Exports-Billions of US $ | % of GDP-Exports || trade_balance || trade_ratio | Unemployment Rate (%) |  Unemployment_Annual Change | 
 x = merged_data[['Net migration',  
                 'Rural population growth (annual %)', 
                 'Population in the largest city (% of urban population)',
@@ -20,7 +34,8 @@ x = merged_data[['Net migration',
                 'CPI Price,not seas.adj,,,',
                 'Age dependency ratio, young',  
                 'Population ages 15-64 (% of total population)',
-                'Population ages 20-24, female (% of female population)']]
+                'Population ages 20-24, female (% of female population)',
+                 '% of GDP', 'Inflation Rate (%)', '% of Total Labor Force Ages 15-24', 'Imports-Billions of US $']]
 y = merged_data['Births']
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, random_state=100)

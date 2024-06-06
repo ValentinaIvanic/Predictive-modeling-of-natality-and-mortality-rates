@@ -124,34 +124,6 @@ def get_AverageSalaryByMonth():
 
 # --------------------------------------------<</ Data from HNB >> ----------------------------------------------------
 
-print(get_womenAgeFirstBirth())
-print(get_womenCompletedAgeFirstMarriage())
-print(get_manCompletedAgeFirstMarriage())
-print(get_womenAgeFirstMarriage())
-# print(get_HICPbyMonth())
-# print(get_PriceIndexResidentalBuilding())
-# print(get_ConsumerIndexes())
-# print(get_AverageSalaryByMonth())
-
-
-# print(get_births())
-# print("--------------------------------------------------------")
-# get_womenAgeFirstBirth()
-# get_womenCompletedAgeFirstMarriage()
-# get_manCompletedAgeFirstMarriage()
-# get_HICPbyMonth()
-# print(get_deaths())
-# print("--------------------------------------------------------")
-# print(get_population())
-# print("--------------------------------------------------------")
-
-
-# get_PriceIndexResidentalBuilding()
-# get_ConsumerIndexes()
-# get_ConsumerProducerPricesIndex()
-# get_FundamentalConsumerPriceIndexes()
-# get_HICP()
-# get_AverageSalaryByMonth()
 
 
 
@@ -322,5 +294,49 @@ def get_worldbankEconomics():
 
     return data_filtered
 
-get_worldbankEconomics()
+
+#-------------------------------------------------------------------<< Economic data (not from WorldBank) >>----------------------------------------------------------------------
+def leave_numbersOnly(column):
+    column_cleaned = column.str.replace(r'[^0-9.]', '', regex=True)
+    return column_cleaned.astype(float)
+
+def columns_to_float(data):
+    data = data.astype(float)
+    data['Year'] = data['Year'].astype(int)
+    return data
+
+def get_maddisonProjectData():
+    data = pd.read_excel("Data/Original/maddison-project-database.xlsx")
+    return columns_to_float(data)
+
+def get_Imports_Exports(): # Year | Imports-Billions of US $ | % of GDP-Imports | Exports-Billions of US $ | % of GDP-Exports || trade_balance || trade_ratio
+    data = pd.read_excel("Data/Original/Imports_Exports.xlsx")
+    data.iloc[:, 1:] = data.iloc[:, 1:].apply(leave_numbersOnly)
+
+    data = columns_to_float(data)
+
+    data['trade_balance'] = data['Imports-Billions of US $'] - data['Exports-Billions of US $']
+    data['trade_ratio'] = data['Exports-Billions of US $'] / data['Imports-Billions of US $']
+
+    return data
+
+def get_inflation():
+    data = pd.read_excel("Data/Original/Inflation.xlsx") # Year | Inflation Rate (%) | Inflation_Annual Change
+    data.iloc[:, 1:] = data.iloc[:, 1:].apply(leave_numbersOnly)
+    return columns_to_float(data)
+
+def get_unemployment(): # Year Unemployment Rate (%) |  Unemployment_Annual Change |  % of Total Labor Force Ages 15-24  | Annual Change, 15-24
+    data = pd.read_excel("Data/Original/Unemployment.xlsx")
+    data.iloc[:, 1:] = data.iloc[:, 1:].apply(leave_numbersOnly)
+    return columns_to_float(data)
+
+def get_manufacturingOutput(): #  Year  |    Billions of US $  |    % of GDP
+    data = pd.read_excel("Data/Original/ManufacturingOutput.xlsx")
+    data.iloc[:, 1:] = data.iloc[:, 1:].apply(leave_numbersOnly)
+    return columns_to_float(data)
+
+
+
+
+
 

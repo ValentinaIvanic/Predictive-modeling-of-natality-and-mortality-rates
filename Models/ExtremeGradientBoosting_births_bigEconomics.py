@@ -3,22 +3,24 @@ from check_score_metrics import *
 from xgboost import XGBRegressor, plot_importance
 
 data = Data_extracting.get_worldbankForBirths()
-
 data_births = Data_extracting.get_births()
+data_gdp = Data_extracting.get_maddisonProjectData()
 
 merged_data = pd.merge(data, data_births, on='Year')
+merged_data = pd.merge(merged_data, data_gdp, on='Year')
 
-merged_data = merged_data.dropna(axis=0, how='any')
-
+# poboljšava onaj bestFeatures bez godine ali ovog s godinom mrvicicu pogorša
 x = merged_data[['Year', 'Net migration',  
-                        'Rural population growth (annual %)', 'Population in the largest city (% of urban population)']]
-y = merged_data['Births']
+                'Population in the largest city (% of urban population)', 
+                'Rural population growth (annual %)',
+                'GDP_per_capita_2011_prices']]
+y = merged_data['Birth rate, crude (per 1,000 people)']
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, random_state=100)
 
 
 import matplotlib.pyplot as plt
-from xgboost import XGBRegressor, DMatrix
+from xgboost import XGBRegressor
 
 eval_set = [(x_train, y_train), (x_test, y_test)]
 
@@ -53,9 +55,13 @@ plt.ylabel('MAE')
 plt.title('XGB train & test errors')
 plt.show()
 
+
+
 draw_Graphs.deviations(y_train, pred_train, "train")
 draw_Graphs.deviations(y_test, predictions, "test")
 
 draw_Graphs.byYear_2datasets(list(x_train['Year']), y_train, pred_train, "train")
 draw_Graphs.byYear_2datasets(list(x_test['Year']), y_test, predictions, "test")
+
+
 
