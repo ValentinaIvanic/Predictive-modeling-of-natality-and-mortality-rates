@@ -1,12 +1,12 @@
 from __imports import *
 
-merged_data = get_dataBirths()
+merged_data = get_dataDeaths()
 features = merged_data.columns.tolist()
 
 correlations = {}
 for feature in features:
-    correlation = merged_data[[feature, 'Births']].corr().iloc[0, 1]
-    if feature != "Births":
+    correlation = merged_data[[feature, 'Deaths']].corr().iloc[0, 1]
+    if feature != "Deaths":
         correlations[feature] = correlation
 
 sorted_correlations = sorted(correlations.items(), key=lambda item: abs(item[1]), reverse=True)
@@ -26,17 +26,17 @@ plt.ylabel('Features')
 plt.show()
 
 plt.figure(figsize=(14, 7))
-plt.plot(merged_data['Year'], merged_data['Births'], label='Births')
+plt.plot(merged_data['Year'], merged_data['Deaths'], label='Deaths')
 plt.xlabel('Year')
 plt.ylabel('Count')
-plt.title('Time Series of Births')
+plt.title('Time Series of Deaths')
 plt.legend()
 plt.show()
 
 
-top_features = [item[0] for item in sorted_correlations[:11]]
+top_features = [item[0] for item in sorted_correlations[:7]]
 top_features.remove('Year')
-top_features.append('Births')
+top_features.append('Deaths')
 
 print(top_features)
 
@@ -46,16 +46,16 @@ scaled_data = scaler.fit_transform(merged_data[top_features])
 scaled_df = pd.DataFrame(scaled_data, columns=top_features)
 scaled_df['Year'] = merged_data['Year']
 
-plt.figure(figsize=(14, 10))
-plt.plot(scaled_df['Year'], scaled_df['Births'], label='Births', linewidth = 6)
+plt.figure(figsize=(14, 8))
+plt.plot(scaled_df['Year'], scaled_df['Deaths'], label='Deaths', linewidth = 6)
 
-top_features.remove('Births')
+top_features.remove('Deaths')
 
 for feature in top_features:
     plt.plot(scaled_df['Year'], scaled_df[feature], label=feature)
 
 plt.xlabel('Year')
 plt.ylabel('Scaled Value')
-plt.title('Top 10 Features with Highest Correlation to Births (Scaled)')
+plt.title('Top 10 Features with Highest Correlation to Deaths (Scaled)')
 plt.legend()
 plt.show()

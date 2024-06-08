@@ -1,7 +1,7 @@
 from __imports import *
 from factor_analyzer import FactorAnalyzer 
 
-merged_data = get_data()
+merged_data = get_dataBirths()
 
 top_features = ['Population ages 65 and above (% of total population)', 
                 'Age dependency ratio, old', 
