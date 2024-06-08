@@ -76,8 +76,42 @@ def get_womenCompletedAgeFirstMarriage():
 def get_manCompletedAgeFirstMarriage():
     return get_dataFromEurostat("Data\Original\First marriage rates by age and sex - males.xlsx", "Sheet 1")
 
-def get_womenAgeFirstMarriage():
-    return get_dataFromEurostat("Data\Original\First-time marrying persons by age and sex.xlsx", "Sheet 1")
+def get_ratioFirstTimeMarriedToPopulation():
+    df = get_dataFromEurostat("Data\Original\First-time marrying persons by age and sex.xlsx", "Sheet 1")
+    df.rename(columns={'Population': 'Number of first-time married in a year'}, inplace=True)
+    df = df.apply(pd.to_numeric, errors='coerce')
+    df['Year'] = df['Year'].astype(int)
+    data_population = get_population()
+    merged_df = pd.merge(df, data_population, on='Year', how='inner')
+    merged_df['Marriage_to_Population_Ratio'] = (merged_df['Number of first-time married in a year'] / merged_df['Population']) * 100
+
+    selected_columns = merged_df.loc[:, ['Year', 'Marriage_to_Population_Ratio']]
+    return selected_columns
+
+def get_HICP_Eurostat():
+    df = pd.read_excel("Data\Original\Harmonised index of consumer prices mjesečno.xlsx", sheet_name="Sheet 1", header=None, skiprows=7)
+
+    filtered_df = df[df[0].isin(['TIME', 'Croatia'])]
+
+    filtered_df = filtered_df[~filtered_df[0].isna()]
+    filtered_df = filtered_df.dropna(axis=1, how='all')
+
+    data_transposed = filtered_df.T
+    data_transposed.columns = data_transposed.iloc[0]
+    data_transposed = data_transposed[1:].reset_index(drop=True)
+    data_transposed = data_transposed.dropna(subset=['TIME'], axis=0)
+
+    data_transposed.rename(columns={'TIME': 'Year', 'Croatia': 'HICP'}, inplace=True)
+    data_transposed = data_transposed.iloc[24:]
+
+
+    data_transposed['Year'] = pd.to_datetime(data_transposed['Year'])
+    data_transposed['Year'] = data_transposed['Year'].dt.year
+
+    df = df.apply(pd.to_numeric, errors='coerce')
+    average_by_year = data_transposed.groupby('Year').mean()
+
+    return average_by_year
 
 def get_HICPbyMonth():
     return get_dataFromEurostat("Data\Original\Harmonised index of consumer prices mjesečno.xlsx", "Sheet 1")
@@ -91,13 +125,6 @@ def get_PriceIndexResidentalBuilding():
     df = df.iloc[:-4]
     print(df)
     return df
-
-def get_ConsumerIndexes():
-    df = get_dataFromHNB("Data\Original\Indeksi pouzdanja, očekivanja, raspoloženja potrošača.xlsx", "HRV", 3)
-    df = df.iloc[:-1]
-    print(df)
-    return df
-
 def get_ConsumerProducerPricesIndex():
     df = get_dataFromHNB("Data\Original\Indeksi potrošačkih cijena i prozivođačkih cijena industrije.xlsx", "HRV", 2)
     df = df.iloc[:-3]
@@ -117,10 +144,20 @@ def get_HICP():
     return df
 
 def get_AverageSalaryByMonth():
-    df = get_dataFromHNB("Data\Original\Prosječna mjesečna neto plaća i indeksi.xlsx", "EUR", 3)
-    df = df.iloc[:-2]
-    print(df)
+    df = pd.read_excel("Data\Original\Indeksi_placa.xlsx", usecols=['Year', 'Godišnji lančani indeks', 'Godišnji mjesešni indeksi average', 'Godišnji kumulativni indeksi average'], nrows = 31)
+    df = df.apply(pd.to_numeric, errors='coerce')
+    df['Year'] = df['Year'].astype(int)
+
     return df
+
+
+def get_ConsumerIndexes():
+    df = pd.read_excel("Data\Original\Indeks_potrosaca.xlsx", usecols=['Year', 'Indeks_pouzdanja_potrosaca', 'Indeks_ocekivanja_potrosaca', 'Indeks_raspolozenja_potrosaca'], nrows = 26)
+    df = df.apply(pd.to_numeric, errors='coerce')
+    df['Year'] = df['Year'].astype(int)
+
+    return df
+
 
 # --------------------------------------------<</ Data from HNB >> ----------------------------------------------------
 #------------------------------------------------- << New predicted data >> -------------------------------------------

@@ -9,6 +9,10 @@ data_manufacturing = Data_extracting.get_manufacturingOutput()
 data_inflation = Data_extracting.get_inflation()
 data_employment = Data_extracting.get_unemployment()
 data_trade = Data_extracting.get_Imports_Exports()
+data_firstMarriageRatio = Data_extracting.get_ratioFirstTimeMarriedToPopulation()
+data_HICP = Data_extracting.get_HICP_Eurostat()
+data_consumerIndexes = Data_extracting.get_ConsumerIndexes()
+data_salaryIndexes = Data_extracting.get_AverageSalaryByMonth()
 
 
 merged_data = pd.merge(data, data_births, on='Year')
@@ -18,13 +22,17 @@ merged_data = pd.merge(merged_data, data_inflation, on='Year')
 merged_data = pd.merge(merged_data, data_employment, on='Year')
 merged_data = pd.merge(merged_data, data_trade, on='Year')
 
+merged_data = pd.merge(merged_data, data_firstMarriageRatio, on='Year')
+# merged_data = pd.merge(merged_data, data_HICP, on='Year')
+# merged_data = pd.merge(merged_data, data_consumerIndexes, on='Year')
+merged_data = pd.merge(merged_data, data_salaryIndexes, on='Year')
 
 merged_data = merged_data[merged_data['Year'].astype(int) > 1995]
-merged_data = merged_data.dropna(axis=0, how='any')
+
 
 print(merged_data.columns)
 # provjeri sa i bez Year, provjerit sve kombinacije moguce ale ale ala, kaj je najmanje moguce a da dela dosta dobro?
-# jos neke moguce opcije(nisu pomogle sa svim ovim ali sa manjim skupom mozda bi):
+# jos neke moguce opcije(nisu pomogle sa svim ovim ali sa manjim skupom mozda bi): Marriage_to_Population_Ratio mrvicu odmoglo but idk, od indeksa placa nic ne pomaze :(
 #  % of GDP-Imports | Exports-Billions of US $ | % of GDP-Exports || trade_balance || trade_ratio | Unemployment Rate (%) |  Unemployment_Annual Change | 
 x = merged_data[['Net migration',  
                 'Rural population growth (annual %)', 
@@ -35,7 +43,8 @@ x = merged_data[['Net migration',
                 'Age dependency ratio, young',  
                 'Population ages 15-64 (% of total population)',
                 'Population ages 20-24, female (% of female population)',
-                 '% of GDP', 'Inflation Rate (%)', '% of Total Labor Force Ages 15-24', 'Imports-Billions of US $']]
+                '% of GDP', 'Inflation Rate (%)', '% of Total Labor Force Ages 15-24', 
+                'Imports-Billions of US $']]
 y = merged_data['Births']
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, random_state=100)
