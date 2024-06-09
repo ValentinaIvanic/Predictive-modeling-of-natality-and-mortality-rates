@@ -3,9 +3,16 @@ from __imports import *
 merged_data = get_dataBirths()
 features = merged_data.columns.tolist()
 
+scaler = MinMaxScaler()
+scaled_data = scaler.fit_transform(merged_data)
+merged_data_scaled = pd.DataFrame(scaled_data, columns=merged_data.columns) 
+
+
+print(merged_data_scaled['Births'])
+
 correlations = {}
 for feature in features:
-    correlation = merged_data[[feature, 'Births']].corr().iloc[0, 1]
+    correlation = merged_data_scaled[[feature, 'Births']].corr().iloc[0, 1]
     if feature != "Births":
         correlations[feature] = correlation
 
@@ -26,7 +33,7 @@ plt.ylabel('Features')
 plt.show()
 
 plt.figure(figsize=(14, 7))
-plt.plot(merged_data['Year'], merged_data['Births'], label='Births')
+plt.plot(merged_data['Year'], merged_data_scaled['Births'], label='Births')
 plt.xlabel('Year')
 plt.ylabel('Count')
 plt.title('Time Series of Births')
@@ -34,8 +41,8 @@ plt.legend()
 plt.show()
 
 
-top_features = [item[0] for item in sorted_correlations[:11]]
-top_features.remove('Year')
+top_features = [item[0] for item in sorted_correlations[:5]]
+# top_features.remove('Year')
 top_features.append('Births')
 
 print(top_features)

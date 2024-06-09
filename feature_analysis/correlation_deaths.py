@@ -3,9 +3,14 @@ from __imports import *
 merged_data = get_dataDeaths()
 features = merged_data.columns.tolist()
 
+
+scaler = MinMaxScaler()
+scaled_data = scaler.fit_transform(merged_data)
+merged_data_scaled = pd.DataFrame(scaled_data, columns=merged_data.columns) 
+
 correlations = {}
 for feature in features:
-    correlation = merged_data[[feature, 'Deaths']].corr().iloc[0, 1]
+    correlation = merged_data_scaled[[feature, 'Deaths']].corr().iloc[0, 1]
     if feature != "Deaths":
         correlations[feature] = correlation
 
@@ -26,7 +31,7 @@ plt.ylabel('Features')
 plt.show()
 
 plt.figure(figsize=(14, 7))
-plt.plot(merged_data['Year'], merged_data['Deaths'], label='Deaths')
+plt.plot(merged_data['Year'], merged_data_scaled['Deaths'], label='Deaths')
 plt.xlabel('Year')
 plt.ylabel('Count')
 plt.title('Time Series of Deaths')

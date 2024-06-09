@@ -10,7 +10,9 @@ merged_data = pd.merge(data, data_births, on='Year')
 # može se dodati Year za jos bolje(r2=0.985), sad ke r2=0.975, to za 'Age dependency ratio, young' kaj je cheating right??
 # za samo 'Net migration', 'Population in the largest city (% of urban population)' je r2 = 0.726 HAAAAAAAAA? (ni jedno zasebno ne dela dobro)
 x = merged_data[['Net migration',  
-                'Population in the largest city (% of urban population)', 'Rural population growth (annual %)'
+                'Population in the largest city (% of urban population)', 'Rural population growth (annual %)',  
+                'Population ages 15-64 (% of total population)',
+                'Population ages 20-24, female (% of female population)'
                 ]]
 y = merged_data['Birth rate, crude (per 1,000 people)']
 
