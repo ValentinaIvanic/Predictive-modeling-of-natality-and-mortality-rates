@@ -9,14 +9,15 @@ First marriage rates by age and sex - males [2001. - 2022.] : https://ec.europa.
 
 
 
-First-time marrying persons by age and sex [1994. - 2022.] : https://ec.europa.eu/eurostat/databrowser/view/demo_nsinagec__custom_11236698/default/table?lang=en
-Prosječna mjesečna neto plaća i indeksi [1992. - 2024.] : https://www.hnb.hr/statistika/statisticki-podaci/odabrane-nefinancijske-statistike/indeksi-placa
-Indeksi pouzdanja, očekivanja, raspoloženja potrošača [1999. - 2024.] : https://www.hnb.hr/statistika/statisticki-podaci/odabrane-nefinancijske-statistike/indeksi-pouzdanja
-Harmonised index of consumer prices mjesečno [1998. - 2024.] : https://ec.europa.eu/eurostat/databrowser/view/prc_hicp_midx__custom_11236807/default/table?lang=en
+
 + Indeksi potrošačkih cijena i prozivođačkih cijena industrije [1998. - 2024.] : 
 + Harmonizirani indeksi potrošačkih cijena [1998. - 2024.] : 
 + Temeljni indeksi potrošačkih cijena [1998. - 2024.] : 
 
+First-time marrying persons by age and sex [1994. - 2022.] : https://ec.europa.eu/eurostat/databrowser/view/demo_nsinagec__custom_11236698/default/table?lang=en
+Harmonised index of consumer prices mjesečno [1998. - 2024.] : https://ec.europa.eu/eurostat/databrowser/view/prc_hicp_midx__custom_11236807/default/table?lang=en
+Prosječna mjesečna neto plaća i indeksi [1992. - 2024.] : https://www.hnb.hr/statistika/statisticki-podaci/odabrane-nefinancijske-statistike/indeksi-placa
+Indeksi pouzdanja, očekivanja, raspoloženja potrošača [1999. - 2024.] : https://www.hnb.hr/statistika/statisticki-podaci/odabrane-nefinancijske-statistike/indeksi-pouzdanja
 
 
 + Indeksi cijena stambenih objekata [2002. - 2023.] : 

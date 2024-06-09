@@ -23,3 +23,19 @@ https://www.kaggle.com/code/karlentsatinyan/lstm-for-us-birth-rate-prediction#Mo
 
 
 https://www.youtube.com/watch?v=c0k-YLQGKjY&ab_channel=GregHogg
+
+https://www.spiceworks.com/tech/artificial-intelligence/articles/what-is-linear-regression/#:~:text=Linear%20regression%20is%20an%20algorithm,machine%20learning%20for%20predictive%20analysis.
+https://www.fer.unizg.hr/_download/repository/UI-2020-10-StrojnoUcenje.pdf
+https://www.emagine.org/blogs/machine-learning-algorithm-linear-regression/
+https://www.influxdata.com/blog/exponential-smoothing-beginners-guide/
+https://www.investopedia.com/terms/r/r-squared.asp
+https://stackoverflow.com/questions/50785479/holt-winters-time-series-forecasting-with-statsmodels
+https://www.statsmodels.org/dev/generated/statsmodels.tsa.holtwinters.ExponentialSmoothing.html
+https://orangematter.solarwinds.com/2019/12/15/holt-winters-forecasting-simplified/
+https://machinelearningmastery.com/extreme-gradient-boosting-ensemble-in-python/
+https://www.sciencedirect.com/topics/computer-science/extreme-gradient-boosting
+https://www.geeksforgeeks.org/ml-xgboost-extreme-gradient-boosting/
+https://www.analyticsvidhya.com/blog/2018/09/an-end-to-end-guide-to-understand-the-math-behind-xgboost/
+https://www.simplilearn.com/what-is-xgboost-algorithm-in-machine-learning-article
+https://www.nvidia.com/en-us/glossary/xgboost/
+https://www.simplilearn.com/what-is-xgboost-algorithm-in-machine-learning-article
