@@ -14,7 +14,7 @@ x = merged_data[['Year', 'Net migration',
                 'Population in the largest city (% of urban population)', 
                 'Rural population growth (annual %)',
                 'GDP_per_capita_2011_prices']]
-y = merged_data['Birth rate, crude (per 1,000 people)']
+y = merged_data['Births']
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, random_state=100)
 

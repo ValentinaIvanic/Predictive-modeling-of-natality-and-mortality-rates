@@ -43,6 +43,13 @@ https://www.nvidia.com/en-us/glossary/xgboost/
 https://www.simplilearn.com/what-is-xgboost-algorithm-in-machine-learning-article
 
 
+https://www.geeksforgeeks.org/complete-guide-to-sarimax-in-python/
+https://zerotomastery.io/blog/arima-sarima-sarimax-explained/
+https://datascientest.com/en/sarimax-model-what-is-it-how-can-it-be-applied-to-time-series
+https://medium.com/@soubhikkhankary28/time-series-forecasting-using-sarimax-ca98dd7238a0
+https://www.geeksforgeeks.org/what-is-an-arimax-model/
+https://365datascience.com/tutorials/python-tutorials/arimax/
+
 Modeli, trebaju imena prezimena, nazivi radova:
 
 Lee-Carter model: https://u.demog.berkeley.edu/~jrw/Biblio/Eprints/%20J-L/lee.carter.1992.pdf

@@ -306,6 +306,10 @@ def get_worldbankForDeaths():
 def get_worldbankEconomics():
     data = pd.read_excel("Data/Original/P_Data_Extract_From_Global_Economic_Monitor_(GEM).xlsx", sheet_name="Data", skiprows=range(1, 5),  nrows=3)
 
+# 'Exchange rate, new LCU per USD extended backward, period average,,',
+#                 'CPI Price, seas. adj.,,,',
+#                 'CPI Price,not seas.adj,,,',
+
     data = data.drop(data.columns[[0, 1, 3]], axis=1)
     data = data.transpose().reset_index()
 
