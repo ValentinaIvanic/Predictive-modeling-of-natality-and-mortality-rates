@@ -7,26 +7,35 @@ data = Data_extracting.get_worldbankForDeaths()
 data_births = Data_extracting.get_deaths()
 data_gdp = Data_extracting.get_maddisonProjectData()
 
+data_economics = Data_extracting.get_worldbankEconomics() 
+        # 'Exchange rate, new LCU per USD extended backward, period average,,',
+        # 'CPI Price, seas. adj.,,,',
+        # 'CPI Price,not seas.adj,,,'
+data_inflation = Data_extracting.get_inflation() #kvari
+
 merged_data = pd.merge(data, data_births, on='Year')
 merged_data = pd.merge(merged_data, data_gdp, on='Year')
+merged_data = pd.merge(merged_data, data_economics, on='Year')
+merged_data = pd.merge(merged_data, data_inflation, on='Year')
+
+merged_data = merged_data[merged_data['Year'].astype(int) > 1986]
 merged_data = merged_data.dropna(axis=0, how='any')
 
-
-# bez survival to age65 je isto dosta dobrooo
+# zanimljivo sa 'Population ages 65 and above (% of total population)' povezano malo sa 'Death rate, crude (per 1,000 people)'
 scaler = StandardScaler()
 scaled_features = scaler.fit_transform(merged_data[['Year', 
                 'Life expectancy at birth, total (years)', 
-                'Age dependency ratio, old', 
-                'Survival to age 65, male (% of cohort)']])
+                'Age dependency ratio, old', 'Exchange rate, new LCU per USD extended backward, period average,,', 
+                'CPI Price, seas. adj.,,,', 'CPI Price,not seas.adj,,,']])
 
 scaled_df = pd.DataFrame(scaled_features, columns=['Year', 
                 'Life expectancy at birth, total (years)', 
-                'Age dependency ratio, old', 
-                'Survival to age 65, male (% of cohort)'])
+                'Age dependency ratio, old', 'Exchange rate, new LCU per USD extended backward, period average,,', 
+                'CPI Price, seas. adj.,,,', 'CPI Price,not seas.adj,,,'])
 
 x = scaled_df.values
 y = merged_data['Deaths']
-print(merged_data['Survival to age 65, male (% of cohort)'])
+
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.6, shuffle = False, random_state=100)
 
 
