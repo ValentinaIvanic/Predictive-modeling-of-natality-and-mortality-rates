@@ -11,7 +11,7 @@ data_economics = Data_extracting.get_worldbankEconomics()
         # 'Exchange rate, new LCU per USD extended backward, period average,,',
         # 'CPI Price, seas. adj.,,,',
         # 'CPI Price,not seas.adj,,,'
-data_inflation = Data_extracting.get_inflation() #kvari
+data_inflation = Data_extracting.get_inflation() #kvari 
 
 merged_data = pd.merge(data, data_births, on='Year')
 merged_data = pd.merge(merged_data, data_gdp, on='Year')

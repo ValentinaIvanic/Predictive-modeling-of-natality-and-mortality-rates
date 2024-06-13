@@ -7,10 +7,12 @@ data = Data_extracting.get_worldbankForBirths()
 data_births = Data_extracting.get_births()
 data_gdp = Data_extracting.get_maddisonProjectData()
 data_economics = Data_extracting.get_worldbankEconomics()
+data_inflation = Data_extracting.get_inflation() #kvari
 
 merged_data = pd.merge(data, data_births, on='Year')
 merged_data = pd.merge(merged_data, data_gdp, on='Year')
 merged_data = pd.merge(merged_data, data_economics, on='Year')
+merged_data = pd.merge(merged_data, data_inflation, on='Year')
 
 merged_data = merged_data.dropna(axis=0, how='any')
 # merged_data = merged_data[merged_data['Year'].astype(int) < 2021]

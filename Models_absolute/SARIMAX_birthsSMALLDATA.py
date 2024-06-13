@@ -7,10 +7,12 @@ data = Data_extracting.get_worldbankForBirths()
 data_births = Data_extracting.get_births()
 data_gdp = Data_extracting.get_maddisonProjectData()
 data_economics = Data_extracting.get_worldbankEconomics()
+data_inflation = Data_extracting.get_inflation() # | Inflation Rate (%) | Inflation_Annual Change , kvari
 
 merged_data = pd.merge(data, data_births, on='Year')
 merged_data = pd.merge(merged_data, data_gdp, on='Year')
 merged_data = pd.merge(merged_data, data_economics, on='Year')
+merged_data = pd.merge(merged_data, data_inflation, on='Year')
 
 merged_data = merged_data[merged_data['Year'].astype(int) > 1986]
 merged_data = merged_data.dropna(axis=0, how='any')
@@ -58,6 +60,15 @@ test_pred = model1.forecast(steps = len(y_test), exog = x_test)
 train_pred = model1.forecast(steps = len(y_train), exog = x_train)
 print_scores(y_test, test_pred)
 print_scores(y_train, train_pred)
+
+print(model1)
+
+coefficients = model1.params
+p_values = model1.pvalues
+
+summary_df = pd.DataFrame({'Coefficient': coefficients, 'p-value': p_values})
+print(summary_df)
+
 
 draw_Graphs.train_test_testPred(merged_data['Year'], y_train, y_test, test_pred, len(y_train))
 draw_Graphs.train_test_trainpred_testPred(merged_data['Year'], y_train, y_test, test_pred, train_pred, len(y_train))
