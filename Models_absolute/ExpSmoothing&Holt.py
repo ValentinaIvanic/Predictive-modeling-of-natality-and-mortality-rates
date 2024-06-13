@@ -41,6 +41,9 @@ def plot_func_HOLT(train, test, forecast1: list[float],
 def exp_Smoothing(train, test, stupac, trend_mod, damped_mod):
     model_ExpSmoothing = ExponentialSmoothing(train[stupac], trend=trend_mod, damped_trend = damped_mod).fit()
     forecast = model_ExpSmoothing.forecast(len(test))
+    print("####################################################################")
+    print(model_ExpSmoothing.summary())
+    print("####################################################################")
     return forecast
 
 
@@ -50,12 +53,22 @@ def exp_Smoothing(train, test, stupac, trend_mod, damped_mod):
 def model_Holt(train, test, stupac, damped_mod):
     model= Holt(train[stupac], damped_trend=damped_mod).fit()
     forecast_Holt = model.forecast(len(test))
+    print("####################################################################")
+    print(model.summary())
+    print("####################################################################")
     return forecast_Holt
 
 #--------------------------------------------------------<< Deaths >>----------------------------------------------------------------------
 
 
 data = Data_extracting.smoothingHolt_deaths()
+# ['Year', 'Life expectancy at birth, total (years)', 'Urban population (% of total population)', 
+#                       'Urban population', 'Survival to age 65, female (% of cohort)', 'Survival to age 65, male (% of cohort)', 
+#                       'Rural population', 'Rural population (% of total population)', 'Rural population growth (annual %)', 
+#                       'Population, total', 'Net migration', 'Population in largest city', 'Population growth (annual %)', 
+#                       'Population ages 80 and above, male (% of male population)', 'Population in the largest city (% of urban population)',
+#                       'Death rate, crude (per 1,000 people)']
+
 
 train_deaths = data.iloc[:int(0.6 * len(data))]
 test_deaths = data.iloc[int(0.6 * len(data)):]
@@ -69,6 +82,14 @@ plot_func_HOLT(train_deaths, test_deaths, forecast_expSmoothing_Deaths, forecast
 #--------------------------------------------------------<< Births >>----------------------------------------------------------------------
 
 data = Data_extracting.smoothingHolt_births()
+# ['Year', 'Net migration', 'Population in largest city', 'Population growth (annual %)', 'Population, total', 
+#                       'Rural population', 'Rural population (% of total population)', 'Rural population growth (annual %)', 
+#                       'Urban population (% of total population)', 'Urban population', 'Population in the largest city (% of urban population)',
+#                       'Birth rate, crude (per 1,000 people)']
+
+
+data_births = Data_extracting.get_births()
+
 
 train = data.iloc[:int(0.5 * len(data))]
 test = data.iloc[int(0.5 * len(data)):]

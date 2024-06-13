@@ -31,12 +31,10 @@ merged_data = merged_data.dropna(axis=0, how='any')
 scaler = StandardScaler()
 scaled_features = scaler.fit_transform(merged_data[['Year', 'Net migration',  
                         'Rural population growth (annual %)', 'Population in the largest city (% of urban population)', 
-                        'Age dependency ratio, young'
                         ]])
 
 scaled_df = pd.DataFrame(scaled_features, columns=['Year', 'Net migration',  
                         'Rural population growth (annual %)', 'Population in the largest city (% of urban population)', 
-                        'Age dependency ratio, young'
                         ])
 
 
@@ -52,7 +50,14 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.6, random
 
 print("###########################################################################")
 model1 = SARIMAX(y_train, exog = x_train, order=(5, 1, 3), seasonal_order=(0, 0, 0, 0)).fit()
-predictions = model1.forecast(steps = len(y_test), exog = x_test)
+
+print(model1)
+
+coefficients = model1.params
+p_values = model1.pvalues
+
+summary_df = pd.DataFrame({'Coefficient': coefficients, 'p-value': p_values})
+print(summary_df)
 
 test_pred = model1.forecast(steps = len(y_test), exog = x_test)
 train_pred = model1.forecast(steps = len(y_train), exog = x_train)

@@ -1,5 +1,13 @@
-- od profesora
+- od profesora(dole su kod onih s imenima itd.)
 
+R2, koef. korelacije itd....
+https://www.investopedia.com/terms/r/r-squared.asp
+https://www.investopedia.com/terms/c/correlationcoefficient.asp
+
+knjiga ona neka: https://www.demogr.mpg.de/books/drm/014/978-3-319-65433-1.pdf
+
+https://link.springer.com/chapter/10.1007/978-94-011-0962-8_19
+https://www.nature.com/articles/s41598-023-39053-1
 https://link.springer.com/article/10.1007/s13385-022-00307-3
 https://github.com/aisha-rm/Data-Sci-Projects/blob/main/CAPSTONE_PROJECT%20final%20(2).ipynb
 https://medium.com/@aisharm13/world-population-data-analysis-and-model-for-prediction-34287391d665
@@ -13,6 +21,9 @@ https://www.mecs-press.org/ijeme/ijeme-v13-n2/IJEME-V13-N2-1.pdf
 https://academic.oup.com/gigascience/article/10/10/giab071/6396189
 https://www.researchgate.net/publication/280563914_Predicting_long-term_population_dynamics_with_bagging_and_boosting_of_process-based_models
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7592293/
+
+https://www.researchgate.net/publication/280563914_Predicting_long-term_population_dynamics_with_bagging_and_boosting_of_process-based_models
+oni turci, trebali bi biti i dole: https://www.researchgate.net/publication/360183940_Application_of_machine_learning_algorithms_for_population_forecasting
 
 https://www.researchgate.net/publication/360183940_Application_of_machine_learning_algorithms_for_population_forecasting
 https://www.sciencedirect.com/science/article/pii/S0038012123001702
@@ -49,6 +60,12 @@ https://datascientest.com/en/sarimax-model-what-is-it-how-can-it-be-applied-to-t
 https://medium.com/@soubhikkhankary28/time-series-forecasting-using-sarimax-ca98dd7238a0
 https://www.geeksforgeeks.org/what-is-an-arimax-model/
 https://365datascience.com/tutorials/python-tutorials/arimax/
+
+
+Exp. smoothing & Holt:
+https://www.influxdata.com/blog/exponential-smoothing-beginners-guide/
+
+
 
 Modeli, trebaju imena prezimena, nazivi radova:
 
