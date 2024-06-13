@@ -36,26 +36,26 @@ x = merged_data[['Year',
                 'Life expectancy at birth, total (years)', 
                 'Age dependency ratio, old', 
 
-                'Exchange rate, new LCU per USD extended backward, period average,,',
-                'CPI Price, seas. adj.,,,',
-                'CPI Price,not seas.adj,,,']].values  
+                'Exchange rate',
+                'CPI Price, seasonal',
+                'CPI Price']].values  
 
 scaler = StandardScaler()
 scaled_features = scaler.fit_transform(merged_data[['Year', 
                 'Life expectancy at birth, total (years)', 
                 'Age dependency ratio, old', 
 
-                'Exchange rate, new LCU per USD extended backward, period average,,',
-                'CPI Price, seas. adj.,,,',
-                'CPI Price,not seas.adj,,,']])
+                'Exchange rate',
+                'CPI Price, seasonal',
+                'CPI Price']])
 
 scaled_df = pd.DataFrame(scaled_features, columns=['Year', 
                 'Life expectancy at birth, total (years)', 
                 'Age dependency ratio, old', 
 
-                'Exchange rate, new LCU per USD extended backward, period average,,',
-                'CPI Price, seas. adj.,,,',
-                'CPI Price,not seas.adj,,,'])
+                'Exchange rate',
+                'CPI Price, seasonal',
+                'CPI Price'])
 
 x = scaled_df.values
 
@@ -85,9 +85,9 @@ coefficients = pd.DataFrame(model.coef_[0], index=['Year',
                 'Life expectancy at birth, total (years)', 
                 'Age dependency ratio, old', 
 
-                'Exchange rate, new LCU per USD extended backward, period average,,',
-                'CPI Price, seas. adj.,,,',
-                'CPI Price,not seas.adj,,,'], columns=['Coefficient'])
+                'Exchange rate',
+                'CPI Price, seasonal',
+                'CPI Price'], columns=['Coefficient'])
 
 plt.figure(figsize=(10, 6))
 sns.barplot(x='Coefficient', y=coefficients.index, data=coefficients, palette='viridis')

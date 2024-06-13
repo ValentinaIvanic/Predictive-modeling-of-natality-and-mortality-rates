@@ -323,6 +323,11 @@ def get_worldbankEconomics():
 
     data_filtered = data_filtered.apply(pd.to_numeric, errors='coerce')
 
+    data_filtered = data_filtered.rename(columns={
+    'Exchange rate, new LCU per USD extended backward, period average,,': 'Exchange rate',
+    'CPI Price, seas. adj.,,,': 'CPI Price, seasonal',
+    'CPI Price,not seas.adj,,,': 'CPI Price'
+    })
     return data_filtered
 
 
@@ -356,14 +361,25 @@ def get_inflation():
     data.iloc[:, 1:] = data.iloc[:, 1:].apply(leave_numbersOnly)
     return columns_to_float(data)
 
-def get_unemployment(): # Year Unemployment Rate (%) |  Unemployment_Annual Change |  % of Total Labor Force Ages 15-24  | Annual Change, 15-24
+def get_unemployment(): # Year Unemployment Rate (%) |  Unemployment_Annual Change |  % of Total Labor Force Ages 15-24  | Employment Annual Change, 15-24
     data = pd.read_excel("Data/Original/Unemployment.xlsx")
     data.iloc[:, 1:] = data.iloc[:, 1:].apply(leave_numbersOnly)
+
+    data = data.rename(columns={
+    'Annual Change, 15-24': 'Employment Annual Change, 15-24'
+    })
     return columns_to_float(data)
 
 def get_manufacturingOutput(): #  Year  |    Billions of US $  |    % of GDP
     data = pd.read_excel("Data/Original/ManufacturingOutput.xlsx")
     data.iloc[:, 1:] = data.iloc[:, 1:].apply(leave_numbersOnly)
+
+
+    data = data.rename(columns={
+    '% of GDP': '% of GDP-Manufacturing',
+    'Billions of US $': 'Manufacturing-Billions of US $'
+    })
+
     return columns_to_float(data)
 
 

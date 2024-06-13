@@ -27,9 +27,10 @@ correlation_df = pd.DataFrame(sorted_correlations, columns=['Feature', 'Correlat
 
 plt.figure(figsize=(12, 10))
 sns.barplot(data=correlation_df, x='Correlation', y='Feature', palette='viridis')
-plt.title('Correlation of Features with Birth Rate')
-plt.xlabel('Correlation Coefficient')
-plt.ylabel('Features')
+plt.title('Korelacija varijabli s brojem rođenih', fontsize=17)
+plt.xlabel('Koeficijent korelacije', fontsize=15)
+plt.ylabel('Imena varijabli', fontsize=15)
+plt.tick_params(axis='both', which='major', labelsize=14) 
 plt.show()
 
 plt.figure(figsize=(14, 7))
@@ -54,15 +55,15 @@ scaled_df = pd.DataFrame(scaled_data, columns=top_features)
 scaled_df['Year'] = merged_data['Year']
 
 plt.figure(figsize=(14, 10))
-plt.plot(scaled_df['Year'], scaled_df['Births'], label='Births', linewidth = 6)
+plt.plot(scaled_df['Year'], scaled_df['Births'], label='Births', linewidth = 6, color='red')
 
 top_features.remove('Births')
 
 for feature in top_features:
-    plt.plot(scaled_df['Year'], scaled_df[feature], label=feature)
+    plt.plot(scaled_df['Year'], scaled_df[feature], label=feature, linewidth = 3)
 
-plt.xlabel('Year')
-plt.ylabel('Scaled Value')
-plt.title('Top 10 Features with Highest Correlation to Births (Scaled)')
-plt.legend()
+plt.xlabel('Godina', fontsize=15)
+plt.ylabel('Skalirane vrijednosti varijabli', fontsize=15)
+plt.title('5 najviše koreliranih varijabli s brojem rođenih(skalirano)', fontsize=16)
+plt.legend(fontsize=14)
 plt.show()

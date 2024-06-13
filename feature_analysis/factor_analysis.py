@@ -7,8 +7,8 @@ top_features = ['Population ages 65 and above (% of total population)',
                 'Age dependency ratio, old', 
                 'Urban population (% of total population)', 
                 'Rural population (% of total population)', 
-                '% of GDP-Exports', 'CPI Price,not seas.adj,,,', 
-                'CPI Price, seas. adj.,,,', 'Age dependency ratio, young', 
+                '% of GDP-Exports', 'CPI Price', 
+                'CPI Price, seasonal', 'Age dependency ratio, young', 
                 'GDP_per_capita_2011_prices', 
                 'Population ages 15-64 (% of total population)']
 

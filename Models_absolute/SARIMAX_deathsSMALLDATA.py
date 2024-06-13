@@ -4,16 +4,16 @@ from statsmodels.tsa.statespace.sarimax import SARIMAX
 from sklearn.preprocessing import StandardScaler
 
 data = Data_extracting.get_worldbankForDeaths()
-data_births = Data_extracting.get_deaths()
+data_deaths = Data_extracting.get_deaths()
 data_gdp = Data_extracting.get_maddisonProjectData()
 
 data_economics = Data_extracting.get_worldbankEconomics() 
-        # 'Exchange rate, new LCU per USD extended backward, period average,,',
-        # 'CPI Price, seas. adj.,,,',
-        # 'CPI Price,not seas.adj,,,'
+        # 'Exchange rate',
+        # 'CPI Price, seasonal',
+        # 'CPI Price'
 data_inflation = Data_extracting.get_inflation() #kvari 
 
-merged_data = pd.merge(data, data_births, on='Year')
+merged_data = pd.merge(data, data_deaths, on='Year')
 merged_data = pd.merge(merged_data, data_gdp, on='Year')
 merged_data = pd.merge(merged_data, data_economics, on='Year')
 merged_data = pd.merge(merged_data, data_inflation, on='Year')
@@ -25,13 +25,13 @@ merged_data = merged_data.dropna(axis=0, how='any')
 scaler = StandardScaler()
 scaled_features = scaler.fit_transform(merged_data[['Year', 
                 'Life expectancy at birth, total (years)', 
-                'Age dependency ratio, old', 'Exchange rate, new LCU per USD extended backward, period average,,', 
-                'CPI Price, seas. adj.,,,', 'CPI Price,not seas.adj,,,']])
+                'Age dependency ratio, old', 'Exchange rate', 
+                'CPI Price, seasonal', 'CPI Price']])
 
 scaled_df = pd.DataFrame(scaled_features, columns=['Year', 
                 'Life expectancy at birth, total (years)', 
-                'Age dependency ratio, old', 'Exchange rate, new LCU per USD extended backward, period average,,', 
-                'CPI Price, seas. adj.,,,', 'CPI Price,not seas.adj,,,'])
+                'Age dependency ratio, old', 'Exchange rate', 
+                'CPI Price, seasonal', 'CPI Price'])
 
 x = scaled_df.values
 y = merged_data['Deaths']

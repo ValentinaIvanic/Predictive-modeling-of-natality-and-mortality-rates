@@ -40,7 +40,7 @@ print("------------------------------\n")
 
 merged_data = merged_data[merged_data['Year'].astype(int) > 1986]
 x = merged_data[['Year', 'Net migration', 'Population in the largest city (% of urban population)',  
-                        'Rural population growth (annual %)',  'CPI Price, seas. adj.,,,', 'Exchange rate, new LCU per USD extended backward, period average,,']].values
+                        'Rural population growth (annual %)',  'CPI Price, seasonal', 'Exchange rate']].values
 y = merged_data[['Births']].values.reshape(-1, 1)
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.75, random_state=50)

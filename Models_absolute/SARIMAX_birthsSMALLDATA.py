@@ -28,21 +28,21 @@ merged_data = merged_data.dropna(axis=0, how='any')
 #        'Population growth (annual %)',
 #        'Net migration',
 #        'GDP_per_capita_2011_prices'
-        # 'Exchange rate, new LCU per USD extended backward, period average,,',
-        # 'CPI Price, seas. adj.,,,',
-        # 'CPI Price,not seas.adj,,,']]
+        # 'Exchange rate',
+        # 'CPI Price, seasonal',
+        # 'CPI Price']]
 
 scaler = StandardScaler()
 scaled_features = scaler.fit_transform(merged_data[['Year', 
                         'Rural population growth (annual %)', 
                         'Population in the largest city (% of urban population)', 
-                        'CPI Price, seas. adj.,,,'
+                        'CPI Price, seasonal'
                         ]])
 
 scaled_df = pd.DataFrame(scaled_features, columns=['Year', 
                         'Rural population growth (annual %)', 
                         'Population in the largest city (% of urban population)', 
-                        'CPI Price, seas. adj.,,,'
+                        'CPI Price, seasonal'
                         ])
 
 

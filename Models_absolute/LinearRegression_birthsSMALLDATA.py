@@ -19,8 +19,8 @@ merged_data = merged_data.dropna(axis=0, how='any')
 merged_data = merged_data[merged_data['Year'].astype(int) > 1986]
 
 #---------------------------------------------------------------------------> BEZ BDP-a
-# x = merged_data[['Year', 'Exchange rate, new LCU per USD extended backward, period average,,',
-#                 'CPI Price, seas. adj.,,,',
+# x = merged_data[['Year', 'Exchange rate',
+#                 'CPI Price, seasonal',
 #                 'Age dependency ratio, young', 
 #                 'Population in the largest city (% of urban population)',   
 #                 'Population ages 15-64 (% of total population)','GDP_per_capita_2011_prices']].values  
@@ -30,14 +30,14 @@ merged_data = merged_data[merged_data['Year'].astype(int) > 1986]
 #                 'GDP_per_capita_2011_prices']].values  
 
 scaler = StandardScaler()
-scaled_features = scaler.fit_transform(merged_data[['Year', 'Exchange rate, new LCU per USD extended backward, period average,,',
-                'CPI Price, seas. adj.,,,',
+scaled_features = scaler.fit_transform(merged_data[['Year', 'Exchange rate',
+                'CPI Price, seasonal',
                 'Age dependency ratio, young', 
                 'Population in the largest city (% of urban population)',   
                 'Population ages 15-64 (% of total population)','GDP_per_capita_2011_prices']])
 
-scaled_df = pd.DataFrame(scaled_features, columns=['Year', 'Exchange rate, new LCU per USD extended backward, period average,,',
-                'CPI Price, seas. adj.,,,',
+scaled_df = pd.DataFrame(scaled_features, columns=['Year', 'Exchange rate',
+                'CPI Price, seasonal',
                 'Age dependency ratio, young', 
                 'Population in the largest city (% of urban population)',   
                 'Population ages 15-64 (% of total population)','GDP_per_capita_2011_prices'])
@@ -75,8 +75,8 @@ draw_Graphs.train_test_testPred(merged_data['Year'], y_train, y_test, test_pred,
 draw_Graphs.train_test_trainpred_testPred(merged_data['Year'], y_train, y_test, test_pred, train_pred, len(y_train))
 
 
-coefficients = pd.DataFrame(model.coef_[0], index=['Year', 'Exchange rate, new LCU per USD extended backward, period average,,',
-                'CPI Price, seas. adj.,,,',
+coefficients = pd.DataFrame(model.coef_[0], index=['Year', 'Exchange rate',
+                'CPI Price, seasonal',
                 'Age dependency ratio, young', 
                 'Population in the largest city (% of urban population)',   
                 'Population ages 15-64 (% of total population)','GDP_per_capita_2011_prices'], columns=['Coefficient'])

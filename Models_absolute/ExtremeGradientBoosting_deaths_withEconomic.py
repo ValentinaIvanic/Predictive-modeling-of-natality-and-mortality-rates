@@ -21,7 +21,7 @@ x = merged_data[['Year', 'Life expectancy at birth, total (years)',
                 'Population ages 80 and above, male (% of male population)', 
                 'Population in the largest city (% of urban population)',
                 'Population ages 65 and above (% of total population)',
-                'Exchange rate, new LCU per USD extended backward, period average,,']]
+                'Exchange rate']]
 y = merged_data['Death rate, crude (per 1,000 people)']
 
 print(x.tail)

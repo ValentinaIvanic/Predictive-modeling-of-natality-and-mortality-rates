@@ -15,9 +15,9 @@ merged_data = merged_data.dropna(axis=0, how='any')
 x = merged_data[['Net migration',  
                 'Rural population growth (annual %)', 
                 'Population in the largest city (% of urban population)',
-                'Exchange rate, new LCU per USD extended backward, period average,,',
-                'CPI Price, seas. adj.,,,',
-                'CPI Price,not seas.adj,,,',
+                'Exchange rate',
+                'CPI Price, seasonal',
+                'CPI Price',
                 'Age dependency ratio, young',  
                 'Population ages 15-64 (% of total population)',
                 'Population ages 20-24, female (% of female population)']]
