@@ -17,15 +17,32 @@ merged_data = merged_data.dropna(axis=0, how='any')
 merged_data = merged_data[merged_data['Year'].astype(int) > 1986]
 
 #---------------------------------------------------------------------------> BEZ BDP-a
-x = merged_data[['Year', 'Exchange rate, new LCU per USD extended backward, period average,,',
-                'CPI Price, seas. adj.,,,',
-                'Age dependency ratio, young', 
-                'Population in the largest city (% of urban population)',   
-                'Population ages 15-64 (% of total population)','GDP_per_capita_2011_prices']].values  
+# x = merged_data[['Year', 'Exchange rate, new LCU per USD extended backward, period average,,',
+#                 'CPI Price, seas. adj.,,,',
+#                 'Age dependency ratio, young', 
+#                 'Population in the largest city (% of urban population)',   
+#                 'Population ages 15-64 (% of total population)','GDP_per_capita_2011_prices']].values  
 
 
 # x = merged_data[['Year', 
 #                 'GDP_per_capita_2011_prices']].values  
+
+scaler = StandardScaler()
+scaled_features = scaler.fit_transform(merged_data[['Year', 'Exchange rate, new LCU per USD extended backward, period average,,',
+                'CPI Price, seas. adj.,,,',
+                'Age dependency ratio, young', 
+                'Population in the largest city (% of urban population)',   
+                'Population ages 15-64 (% of total population)','GDP_per_capita_2011_prices']])
+
+scaled_df = pd.DataFrame(scaled_features, columns=['Year', 'Exchange rate, new LCU per USD extended backward, period average,,',
+                'CPI Price, seas. adj.,,,',
+                'Age dependency ratio, young', 
+                'Population in the largest city (% of urban population)',   
+                'Population ages 15-64 (% of total population)','GDP_per_capita_2011_prices'])
+
+x = scaled_df.values
+
+
 y = merged_data['Births'].values.reshape(-1, 1)
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, random_state=100, shuffle=False)

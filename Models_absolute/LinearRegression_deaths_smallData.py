@@ -38,6 +38,26 @@ x = merged_data[['Year',
                 'CPI Price, seas. adj.,,,',
                 'CPI Price,not seas.adj,,,']].values  
 
+scaler = StandardScaler()
+scaled_features = scaler.fit_transform(merged_data[['Year', 
+                'Life expectancy at birth, total (years)', 
+                'Age dependency ratio, old', 
+
+                'Exchange rate, new LCU per USD extended backward, period average,,',
+                'CPI Price, seas. adj.,,,',
+                'CPI Price,not seas.adj,,,']])
+
+scaled_df = pd.DataFrame(scaled_features, columns=['Year', 
+                'Life expectancy at birth, total (years)', 
+                'Age dependency ratio, old', 
+
+                'Exchange rate, new LCU per USD extended backward, period average,,',
+                'CPI Price, seas. adj.,,,',
+                'CPI Price,not seas.adj,,,'])
+
+x = scaled_df.values
+
+
 y = merged_data['Deaths'].values.reshape(-1, 1)
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.7, random_state=100, shuffle=False)
@@ -60,16 +80,12 @@ draw_Graphs.train_test_testPred(merged_data['Year'], y_train, y_test, test_pred,
 draw_Graphs.train_test_trainpred_testPred(merged_data['Year'], y_train, y_test, test_pred, train_pred, len(y_train))
 
 coefficients = pd.DataFrame(model.coef_[0], index=['Year', 
-                'GDP_per_capita_2011_prices' ,'Life expectancy at birth, total (years)', 
-                'Urban population (% of total population)', 
-                'Survival to age 65, female (% of cohort)', 'Survival to age 65, male (% of cohort)', 
-                'Rural population (% of total population)', 'Rural population growth (annual %)', 
-                'Net migration', 'Population growth (annual %)', 
-                'Population ages 80 and above, male (% of male population)', 
-                'Population in the largest city (% of urban population)',
-                'Population ages 65 and above (% of total population)',
-                'Population ages 15-64 (% of total population)',
-                'Age dependency ratio, old'], columns=['Coefficient'])
+                'Life expectancy at birth, total (years)', 
+                'Age dependency ratio, old', 
+
+                'Exchange rate, new LCU per USD extended backward, period average,,',
+                'CPI Price, seas. adj.,,,',
+                'CPI Price,not seas.adj,,,'], columns=['Coefficient'])
 
 plt.figure(figsize=(10, 6))
 sns.barplot(x='Coefficient', y=coefficients.index, data=coefficients, palette='viridis')
