@@ -78,11 +78,13 @@ coefficients = pd.DataFrame(model.coef_[0], index=['Year',
 
 plt.figure(figsize=(10, 6))
 sns.barplot(x='Coefficient', y=coefficients.index, data=coefficients, palette='viridis')
-plt.title('Coefficients of Features')
-plt.xlabel('Coefficient Value')
-plt.ylabel('Features')
-plt.show()
+plt.title('Koeficijenti varijabli za model', fontsize = 17)
+plt.xlabel('Vrijednost koeficijenta',  fontsize = 15)
+plt.ylabel('Varijable',  fontsize = 15)
+plt.xticks(fontsize=14)
+plt.yticks(fontsize=14)
 
+plt.show()
 
 #--------------------------------------------- << Predict new data >> ------------------------------------------------
 

@@ -6,7 +6,6 @@ from sklearn.linear_model import LinearRegression
 data = Data_extracting.get_worldbankForBirths()
 data_births = Data_extracting.get_births()
 data_gdp = Data_extracting.get_maddisonProjectData()
-
 merged_data = pd.merge(data, data_births, on='Year')
 merged_data = pd.merge(merged_data, data_gdp, on='Year')
 merged_data = merged_data.dropna(axis=0, how='any')
@@ -24,11 +23,11 @@ merged_data = merged_data.dropna(axis=0, how='any')
 
 
 scaler = StandardScaler()
-scaled_features = scaler.fit_transform(merged_data[['Year', 
+scaled_features = scaler.fit_transform(merged_data[['Year', 'Age dependency ratio, young', 
                 'Population in the largest city (% of urban population)', 'Rural population growth (annual %)',  
                 'Population ages 15-64 (% of total population)','GDP_per_capita_2011_prices']])
 
-scaled_df = pd.DataFrame(scaled_features, columns=['Year', 
+scaled_df = pd.DataFrame(scaled_features, columns=['Year', 'Age dependency ratio, young', 
                 'Population in the largest city (% of urban population)', 'Rural population growth (annual %)',  
                 'Population ages 15-64 (% of total population)','GDP_per_capita_2011_prices'])
 
@@ -63,15 +62,18 @@ draw_Graphs.train_test_testPred(merged_data['Year'], y_train, y_test, test_pred,
 draw_Graphs.train_test_trainpred_testPred(merged_data['Year'], y_train, y_test, test_pred, train_pred, len(y_train))
 
 
-coefficients = pd.DataFrame(model.coef_[0], index=['Year', 
+coefficients = pd.DataFrame(model.coef_[0], index=['Year', 'Age dependency ratio, young', 
                 'Population in the largest city (% of urban population)', 'Rural population growth (annual %)',  
                 'Population ages 15-64 (% of total population)','GDP_per_capita_2011_prices'], columns=['Coefficient'])
 
 plt.figure(figsize=(10, 6))
 sns.barplot(x='Coefficient', y=coefficients.index, data=coefficients, palette='viridis')
-plt.title('Coefficients of Features')
-plt.xlabel('Coefficient Value')
-plt.ylabel('Features')
+plt.title('Koeficijenti varijabli za model', fontsize = 17)
+plt.xlabel('Vrijednost koeficijenta',  fontsize = 15)
+plt.ylabel('Varijable',  fontsize = 15)
+plt.xticks(fontsize=14)
+plt.yticks(fontsize=14)
+
 plt.show()
 
 

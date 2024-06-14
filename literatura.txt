@@ -64,7 +64,7 @@ https://365datascience.com/tutorials/python-tutorials/arimax/
 
 Exp. smoothing & Holt:
 https://www.influxdata.com/blog/exponential-smoothing-beginners-guide/
-
+https://otexts.com/fpp2/holt.html
 
 
 Modeli, trebaju imena prezimena, nazivi radova:

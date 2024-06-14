@@ -32,18 +32,19 @@ merged_data = merged_data.dropna(axis=0, how='any')
 #                 'Age dependency ratio, old']].values  
 
 # ------------------- Probaj bez survival to age 65?, sa 'Survival to age 65, female (% of cohort)', 'Survival to age 65, male (% of cohort)',  je poprilican cheating
-x = merged_data[['Year', 
-                'Life expectancy at birth, total (years)', 
-                'Age dependency ratio, old', 
+# x = merged_data[['Year', 
+#                 'Life expectancy at birth, total (years)', 
+#                 'Age dependency ratio, old', 
+#                 'Survival to age 65, male (% of cohort)',
 
-                'Exchange rate',
-                'CPI Price, seasonal',
-                'CPI Price']].values  
+#                 'Exchange rate',
+#                 'CPI Price, seasonal',
+#                 'CPI Price']].values  
 
 scaler = StandardScaler()
 scaled_features = scaler.fit_transform(merged_data[['Year', 
                 'Life expectancy at birth, total (years)', 
-                'Age dependency ratio, old', 
+                'Survival to age 65, male (% of cohort)',
 
                 'Exchange rate',
                 'CPI Price, seasonal',
@@ -51,7 +52,7 @@ scaled_features = scaler.fit_transform(merged_data[['Year',
 
 scaled_df = pd.DataFrame(scaled_features, columns=['Year', 
                 'Life expectancy at birth, total (years)', 
-                'Age dependency ratio, old', 
+                'Survival to age 65, male (% of cohort)',
 
                 'Exchange rate',
                 'CPI Price, seasonal',
@@ -83,15 +84,17 @@ draw_Graphs.train_test_trainpred_testPred(merged_data['Year'], y_train, y_test, 
 
 coefficients = pd.DataFrame(model.coef_[0], index=['Year', 
                 'Life expectancy at birth, total (years)', 
-                'Age dependency ratio, old', 
-
+                'Survival to age 65, male (% of cohort)',
                 'Exchange rate',
                 'CPI Price, seasonal',
                 'CPI Price'], columns=['Coefficient'])
 
 plt.figure(figsize=(10, 6))
 sns.barplot(x='Coefficient', y=coefficients.index, data=coefficients, palette='viridis')
-plt.title('Coefficients of Features')
-plt.xlabel('Coefficient Value')
-plt.ylabel('Features')
+plt.title('Koeficijenti varijabli za model', fontsize = 17)
+plt.xlabel('Vrijednost koeficijenta',  fontsize = 15)
+plt.ylabel('Varijable',  fontsize = 15)
+plt.xticks(fontsize=14)
+plt.yticks(fontsize=14)
+
 plt.show()

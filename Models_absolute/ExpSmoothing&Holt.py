@@ -25,9 +25,9 @@ def plot_func_HOLT(train, test, forecast1: list[float],
               title: str, stupac, naslov) -> None:
     """Function to plot the forecasts."""
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=train['Year'], y=train[stupac], name='Train'))
-    fig.add_trace(go.Scatter(x=test['Year'], y=test[stupac], name='Test'))
-    fig.add_trace(go.Scatter(x=test['Year'], y=forecast1, name='Exp. Smoothing'))
+    fig.add_trace(go.Scatter(x=train['Year'], y=train[stupac], name='Podatci za treniranje'))
+    fig.add_trace(go.Scatter(x=test['Year'], y=test[stupac], name='Podatci za testiranje'))
+    fig.add_trace(go.Scatter(x=test['Year'], y=forecast1, name='Holt-Winters'))
     fig.add_trace(go.Scatter(x=test['Year'], y=forecast2, name='Holt'))
     fig.update_layout(template="simple_white", font=dict(size=15), title_text=title,
                       width=650, title_x=0.5, height=400, xaxis_title='Godina',

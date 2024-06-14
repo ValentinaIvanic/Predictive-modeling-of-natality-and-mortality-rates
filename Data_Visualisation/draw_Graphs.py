@@ -34,13 +34,13 @@ def train_test_testPred(years, y_train, y_test, y_predictions, train_size):
     years_train = years[:train_size]
     years_test = years[train_size:]
 
-    plt.plot(years_train, y_train, label='Train Data', color='blue')
-    plt.plot(years_test, y_test, label='Test Data', color='green')
-    plt.plot(years_test, y_predictions, label='Predictions', color='red', linestyle='dashed')
+    plt.plot(years_train, y_train, label='Podatci za učenje', color='blue')
+    plt.plot(years_test, y_test, label='Podatci za testiranje', color='green')
+    plt.plot(years_test, y_predictions, label='Predikcije - podatci za testiranje', color='red', linestyle='dotted')
     
-    plt.xlabel('Year')
-    plt.ylabel('Values')
-    plt.title('Time Series Data and Predictions')
+    plt.xlabel('Godina')
+    plt.ylabel('Vrijednosti')
+    plt.title('Prikaz stvarnih i prediktivnih vrijednosti')
     plt.legend()
     plt.grid(True)
     plt.show()
@@ -51,15 +51,15 @@ def train_test_trainpred_testPred(years, y_train, y_test, y_predictions, train_p
     years_train = years[:train_size]
     years_test = years[train_size:]
     
-    plt.plot(years_train, y_train, label='Train Data', color='blue')
-    plt.plot(years_test, y_test, label='Test Data', color='green')
-    plt.plot(years_test, y_predictions, label='Y Predictions', color='red', linestyle='dashed')
-    plt.plot(years_train, train_predictions, label='Train Predictions', color='purple', linestyle='dotted')
+    plt.plot(years_train, y_train, label='Podatci za učenje', color='blue', linewidth=3)
+    plt.plot(years_test, y_test, label='Podatci za testiranje', color='green', linewidth=3)
+    plt.plot(years_test, y_predictions, label='Predikcije - podatci za testiranje', color='red', linestyle='dashed', linewidth=3)
+    plt.plot(years_train, train_predictions, label='Predikcije - podatci za učenje', color='red', linestyle='dotted', linewidth=3)
     
-    plt.xlabel('Year')
-    plt.ylabel('Values')
-    plt.title('Time Series Data and Predictions')
-    plt.legend()
+    plt.xlabel('Godina', fontsize=17)
+    plt.ylabel('Vrijednosti', fontsize=17)
+    plt.title('Prikaz stvarnih i prediktivnih vrijednosti', fontsize=18)
+    plt.legend(fontsize=15)
     plt.grid(True)
     plt.show()
 
