@@ -59,6 +59,10 @@ print_scores(y_test, predictions)
 
 fig, ax = plt.subplots()
 plot_importance(model, ax=ax)
+ax.set_xlabel('F score', fontsize = 18)
+ax.set_ylabel('Varijable', fontsize = 18)
+ax.set_title('Važnost varijabli u modelu', fontsize = 18)
+ax.tick_params(axis='both', which='major', labelsize=15)
 plt.show()
 
 #----------------------------------------------<< Overfitting checks >>-----------------------------------------

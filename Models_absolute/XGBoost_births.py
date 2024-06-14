@@ -20,7 +20,7 @@ merged_data = merged_data.dropna(axis=0, how='any')
 # 'Urban population' pogoršava iako na SMALLDATA poboljšava
 
 x = merged_data[['Rural population (% of total population)', 'Population ages 15-64 (% of total population)', 
-                 'Population ages 20-24, female (% of female population)', 
+                 'Population ages 20-24, female (% of female population)', 'Age dependency ratio, young', 'Urban population (% of total population)',
                  'Population growth (annual %)'
                 ]]
 
@@ -70,9 +70,9 @@ fig, ax = plt.subplots()
 ax.plot(x_axis, results['validation_0']['mae'], label='Train')
 ax.plot(x_axis, results['validation_1']['mae'], label='Test')
 ax.legend()
-plt.xlabel('Broj iteracija')
-plt.ylabel('MAE')
-plt.title('XGB train & test errors')
+plt.xlabel('Broj iteracija', fontsize = 18)
+plt.ylabel('MAE', fontsize = 18)
+plt.title('XGB greške na podatcima za treniranje i testiranje', fontsize = 18)
 plt.show()
 
 test_pred = model.predict(x_test)

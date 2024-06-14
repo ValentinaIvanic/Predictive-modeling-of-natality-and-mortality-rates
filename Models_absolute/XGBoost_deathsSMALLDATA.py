@@ -3,6 +3,7 @@ from check_score_metrics import *
 from xgboost import XGBRegressor, plot_importance
 import matplotlib.pyplot as plt
 import shap
+from sklearn.feature_selection import RFE
 
 
 data = Data_extracting.get_worldbankForDeaths()
@@ -42,23 +43,11 @@ merged_data = merged_data.dropna(axis=0, how='any')
 
 #overfitta mi sa bilocim 
 x = merged_data[['Population ages 15-64 (% of total population)',
-       'Population ages 65 and above (% of total population)',
        'Population ages 20-24, female (% of female population)',
-       'Age dependency ratio, old', 'Age dependency ratio, young',
-       'Life expectancy at birth, total (years)',
-       'Urban population (% of total population)', 'Urban population',
-       'Survival to age 65, female (% of cohort)',
-       'Survival to age 65, male (% of cohort)', 'Rural population',
-       'Rural population (% of total population)',
-       'Rural population growth (annual %)', 'Population, total',
+       'Survival to age 65, male (% of cohort)',
        'Population in the largest city (% of urban population)',
-       'Population growth (annual %)', 'Population in largest city',
-       'Population ages 80 and above, male (% of male population)',
-       'Net migration',
-       'GDP_per_capita_2011_prices', 'population', 'CPI Price, seas. adj.,,,',
-       'CPI Price,not seas.adj,,,',
-       'Exchange rate',
-       'Inflation Rate (%)', 'Inflation_Annual Change']]
+       'Population growth (annual %)',  'Exchange rate', 'Life expectancy at birth, total (years)',
+       'Inflation_Annual Change']]
 y = merged_data['Deaths']
 
 
@@ -75,7 +64,35 @@ print_scores(y_test, predictions)
 
 fig, ax = plt.subplots()
 plot_importance(model, ax=ax)
+ax.set_xlabel('F score', fontsize = 18)
+ax.set_ylabel('Varijable', fontsize = 18)
+ax.set_title('Važnost varijabli u modelu', fontsize = 18)
+ax.tick_params(axis='both', which='major', labelsize=15)
 plt.show()
+
+# x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.65, shuffle=False, random_state=100)
+# model = XGBRegressor(objective='reg:squarederror', n_estimators=100, learning_rate=0.1)
+
+# selector = RFE(estimator=model, n_features_to_select=None, step=1)
+# selector = selector.fit(x_train, y_train)
+
+# selected_features = x.columns[selector.support_]
+# print("Selected Features:", selected_features)
+
+# x_train_selected = selector.transform(x_train)
+# x_test_selected = selector.transform(x_test)
+# eval_set = [(x_train_selected, y_train), (x_test_selected, y_test)]
+
+# model.fit(x_train_selected, y_train, eval_metric='mae', eval_set=eval_set, verbose=True)
+
+# predictions = model.predict(x_test_selected)
+# print_scores(y_test, predictions)
+
+# explainer = shap.Explainer(model)
+# shap_values = explainer(x_test_selected)
+
+# shap.summary_plot(shap_values, x_test_selected, feature_names=selected_features)
+
 
 #----------------------------------------------<< Overfitting checks >>-----------------------------------------
 
@@ -92,9 +109,9 @@ fig, ax = plt.subplots()
 ax.plot(x_axis, results['validation_0']['mae'], label='Train')
 ax.plot(x_axis, results['validation_1']['mae'], label='Test')
 ax.legend()
-plt.xlabel('Number of Iterations')
-plt.ylabel('Mean Absolute Error')
-plt.title('XGBoost Training and Validation Error')
+plt.xlabel('Broj iteracija', fontsize = 18)
+plt.ylabel('MAE', fontsize = 18)
+plt.title('XGB greške na podatcima za treniranje i testiranje', fontsize = 18)
 plt.show()
 
 
