@@ -82,10 +82,6 @@ plot_func_HOLT(train_deaths, test_deaths, forecast_expSmoothing_Deaths, forecast
 #--------------------------------------------------------<< Births >>----------------------------------------------------------------------
 
 data = Data_extracting.smoothingHolt_births()
-# ['Year', 'Net migration', 'Population in largest city', 'Population growth (annual %)', 'Population, total', 
-#                       'Rural population', 'Rural population (% of total population)', 'Rural population growth (annual %)', 
-#                       'Urban population (% of total population)', 'Urban population', 'Population in the largest city (% of urban population)',
-#                       'Birth rate, crude (per 1,000 people)']
 
 
 data_births = Data_extracting.get_births()

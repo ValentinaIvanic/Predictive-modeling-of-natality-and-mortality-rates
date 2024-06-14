@@ -33,16 +33,14 @@ merged_data = merged_data.dropna(axis=0, how='any')
         # 'CPI Price']]
 
 scaler = StandardScaler()
-scaled_features = scaler.fit_transform(merged_data[['Year', 
+scaled_features = scaler.fit_transform(merged_data[['Year',
                         'Rural population growth (annual %)', 
                         'Population in the largest city (% of urban population)', 
-                        'CPI Price, seasonal'
                         ]])
 
-scaled_df = pd.DataFrame(scaled_features, columns=['Year', 
+scaled_df = pd.DataFrame(scaled_features, columns=['Year',
                         'Rural population growth (annual %)', 
                         'Population in the largest city (% of urban population)', 
-                        'CPI Price, seasonal'
                         ])
 
 
@@ -61,13 +59,13 @@ train_pred = model1.forecast(steps = len(y_train), exog = x_train)
 print_scores(y_test, test_pred)
 print_scores(y_train, train_pred)
 
-print(model1)
+# print(model1)
 
-coefficients = model1.params
-p_values = model1.pvalues
+# # coefficients = model1.params
+# # p_values = model1.pvalues
 
-summary_df = pd.DataFrame({'Coefficient': coefficients, 'p-value': p_values})
-print(summary_df)
+# # summary_df = pd.DataFrame({'Coefficient': coefficients, 'p-value': p_values})
+# # print(summary_df)
 
 
 draw_Graphs.train_test_testPred(merged_data['Year'], y_train, y_test, test_pred, len(y_train))

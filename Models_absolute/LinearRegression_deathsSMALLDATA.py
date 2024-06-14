@@ -46,7 +46,6 @@ scaled_features = scaler.fit_transform(merged_data[['Year',
                 'Life expectancy at birth, total (years)', 
                 'Survival to age 65, male (% of cohort)',
 
-                'Exchange rate',
                 'CPI Price, seasonal',
                 'CPI Price']])
 
@@ -54,7 +53,6 @@ scaled_df = pd.DataFrame(scaled_features, columns=['Year',
                 'Life expectancy at birth, total (years)', 
                 'Survival to age 65, male (% of cohort)',
 
-                'Exchange rate',
                 'CPI Price, seasonal',
                 'CPI Price'])
 
@@ -85,7 +83,6 @@ draw_Graphs.train_test_trainpred_testPred(merged_data['Year'], y_train, y_test, 
 coefficients = pd.DataFrame(model.coef_[0], index=['Year', 
                 'Life expectancy at birth, total (years)', 
                 'Survival to age 65, male (% of cohort)',
-                'Exchange rate',
                 'CPI Price, seasonal',
                 'CPI Price'], columns=['Coefficient'])
 

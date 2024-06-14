@@ -46,7 +46,9 @@ x = merged_data[['Population ages 15-64 (% of total population)',
        'Population ages 20-24, female (% of female population)',
        'Survival to age 65, male (% of cohort)',
        'Population in the largest city (% of urban population)',
-       'Population growth (annual %)',  'Exchange rate', 'Life expectancy at birth, total (years)',
+       'Population growth (annual %)',  
+       'Exchange rate', 
+       'Life expectancy at birth, total (years)',
        'Inflation_Annual Change']]
 y = merged_data['Deaths']
 
