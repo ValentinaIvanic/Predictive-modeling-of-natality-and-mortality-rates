@@ -3,6 +3,7 @@
 R2, koef. korelacije itd....
 https://www.investopedia.com/terms/r/r-squared.asp
 https://www.investopedia.com/terms/c/correlationcoefficient.asp
+https://medium.com/analytics-vidhya/the-perfect-fit-for-a-dnn-596954c9ea39
 
 knjiga ona neka: https://www.demogr.mpg.de/books/drm/014/978-3-319-65433-1.pdf
 
