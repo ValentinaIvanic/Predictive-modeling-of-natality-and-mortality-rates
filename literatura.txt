@@ -41,11 +41,9 @@ https://www.youtube.com/watch?v=c0k-YLQGKjY&ab_channel=GregHogg
 https://www.spiceworks.com/tech/artificial-intelligence/articles/what-is-linear-regression/#:~:text=Linear%20regression%20is%20an%20algorithm,machine%20learning%20for%20predictive%20analysis.
 https://www.fer.unizg.hr/_download/repository/UI-2020-10-StrojnoUcenje.pdf
 https://www.emagine.org/blogs/machine-learning-algorithm-linear-regression/
-https://www.influxdata.com/blog/exponential-smoothing-beginners-guide/
-https://www.investopedia.com/terms/r/r-squared.asp
-https://stackoverflow.com/questions/50785479/holt-winters-time-series-forecasting-with-statsmodels
-https://www.statsmodels.org/dev/generated/statsmodels.tsa.holtwinters.ExponentialSmoothing.html
-https://orangematter.solarwinds.com/2019/12/15/holt-winters-forecasting-simplified/
+https://realpython.com/linear-regression-in-python/#:~:text=When%20implementing%20linear%20regression%20of,equation%20is%20the%20regression%20equation.
+
+
 https://machinelearningmastery.com/extreme-gradient-boosting-ensemble-in-python/
 https://www.sciencedirect.com/topics/computer-science/extreme-gradient-boosting
 https://www.geeksforgeeks.org/ml-xgboost-extreme-gradient-boosting/
@@ -63,19 +61,38 @@ https://www.geeksforgeeks.org/what-is-an-arimax-model/
 https://365datascience.com/tutorials/python-tutorials/arimax/
 
 
+
+
+
+https://www.investopedia.com/terms/r/r-squared.asp
+
+
+https://stackoverflow.com/questions/50785479/holt-winters-time-series-forecasting-with-statsmodels
+https://www.statsmodels.org/dev/generated/statsmodels.tsa.holtwinters.ExponentialSmoothing.html
+https://orangematter.solarwinds.com/2019/12/15/holt-winters-forecasting-simplified/
+
+
+
+
+DONE:
+
 Exp. smoothing & Holt:
 https://www.influxdata.com/blog/exponential-smoothing-beginners-guide/
 https://otexts.com/fpp2/holt.html
 
 
-Modeli, trebaju imena prezimena, nazivi radova:
+https://www.spiceworks.com/tech/artificial-intelligence/articles/what-is-linear-regression/#:~:text=Linear%20regression%20is%20an%20algorithm,machine%20learning%20for%20predictive%20analysis.
+https://zerotomastery.io/blog/arima-sarima-sarimax-explained/
+https://www.simplilearn.com/what-is-xgboost-algorithm-in-machine-learning-article
 
-Lee-Carter model: https://u.demog.berkeley.edu/~jrw/Biblio/Eprints/%20J-L/lee.carter.1992.pdf
+
+Modeli, trebaju imena prezimena, nazivi radova:
+Lee-Carter 1992 model: https://u.demog.berkeley.edu/~jrw/Biblio/Eprints/%20J-L/lee.carter.1992.pdf
 ----Lee, Roland 2000. https://www.researchgate.net/publication/228560399_The_Lee-Carter_Method_for_Forecasting_Mortality_with_Various_Extensions_and_Applications
-G. Niu, B. Melenberg  https://research.tilburguniversity.edu/en/publications/trends-in-mortality-decrease-and-economic-growth
-Dimai, Mateo https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4394933
+G. Niu, B. Melenberg 2014 https://research.tilburguniversity.edu/en/publications/trends-in-mortality-decrease-and-economic-growth
+Dimai, Mateo 2023 https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4394933
 Nick Turner, Kendra Robbins, 2022 https://jamanetwork.com/journals/jamapediatrics/fullarticle/2799041
-D. Susan McNeil,  Ansley J. Coale https://u.demog.berkeley.edu/~jrw/Biblio/Eprints/%20A-C/coale.mcneil.1972_first.marriage_JASA.pdf
-Zhu, Zhu, Gu, Chen, Zhan, Li, Huang, Xu and Li https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9521649/
-Jochem WC https://europepmc.org/article/med/32929009    |    https://www.pnas.org/doi/full/10.1073/pnas.1913050117
-Fatih Veli Şahinarslan*, Ahmet Tezcan Tekin and Ferhan Çebi https://www.researchgate.net/publication/360183940_Application_of_machine_learning_algorithms_for_population_forecasting
+D. Susan McNeil,  Ansley J. Coale 1972 https://u.demog.berkeley.edu/~jrw/Biblio/Eprints/%20A-C/coale.mcneil.1972_first.marriage_JASA.pdf
+Zhu, Zhu, Gu, Chen, Zhan, Li, Huang, Xu and Li 2022 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9521649/
+Jochem WC https://europepmc.org/article/med/32929009  2020  |    https://www.pnas.org/doi/full/10.1073/pnas.1913050117
+Fatih Veli Şahinarslan*, Ahmet Tezcan Tekin and Ferhan Çebi 2021 https://www.researchgate.net/publication/360183940_Application_of_machine_learning_algorithms_for_population_forecasting
